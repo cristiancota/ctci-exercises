@@ -29,7 +29,7 @@ class ArraysAndStringsTest {
     @Test
     void testURLify() {
         ArraysAndStrings arraysAndStrings = new ArraysAndStrings();
-        assertEquals(arraysAndStrings.urlify("Mr John Smith     ", 13), "Mr%20John%20Smith");
-        assertEquals(arraysAndStrings.urlify("cristian cota", 13), "cristian%20cota");
+        assertEquals("Mr%20John%20Smith", arraysAndStrings.urlify("Mr John Smith     ", 13));
+        assertEquals("cristian%20cota", arraysAndStrings.urlify("cristian cota", 13));
     }
 }
