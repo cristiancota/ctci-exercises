@@ -32,4 +32,14 @@ class ArraysAndStringsTest {
         assertEquals("Mr%20John%20Smith", arraysAndStrings.urlify("Mr John Smith     ", 13));
         assertEquals("cristian%20cota", arraysAndStrings.urlify("cristian cota", 13));
     }
+
+    @Test
+    void testPalindromePermutation() {
+        ArraysAndStrings arraysAndStrings = new ArraysAndStrings();
+        assertTrue(arraysAndStrings.isPalindromePermutation("Tact coa"));
+        assertTrue(arraysAndStrings.isPalindromePermutation("anita lava la tina"));
+        assertTrue(arraysAndStrings.isPalindromePermutation("aabbaa"));
+        assertTrue(arraysAndStrings.isPalindromePermutation("a ab baa"));
+        assertFalse(arraysAndStrings.isPalindromePermutation("this is not a palindrome at all x"));
+    }
 }

@@ -1,5 +1,6 @@
 package arraysAndStrings;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 class ArraysAndStrings {
@@ -31,4 +32,19 @@ class ArraysAndStrings {
 
         return stringBuilder.toString();
     }
+
+
+    boolean isPalindromePermutation(String word) {
+        char[] chars = word.replace(" ", "").toLowerCase().toCharArray();
+        Arrays.sort(chars);
+
+        for (int i = 0; i < chars.length - 1; i += 2)
+            if (chars[i] != chars[i + 1]) {
+                if (chars.length % 2 != 0) i--;
+                else return false;
+            }
+
+        return true;
+    }
+
 }
