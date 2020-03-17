@@ -42,4 +42,22 @@ class ArraysAndStringsTest {
         assertTrue(arraysAndStrings.isPalindromePermutation("a ab baa"));
         assertFalse(arraysAndStrings.isPalindromePermutation("this is not a palindrome at all x"));
     }
+
+    @Test
+    void testIsOneAway() {
+        ArraysAndStrings arraysAndStrings = new ArraysAndStrings();
+        assertTrue(arraysAndStrings.isOneAway("ala", "pala"));
+        assertTrue(arraysAndStrings.isOneAway("pale", "ple"));
+        assertTrue(arraysAndStrings.isOneAway("pales", "pale"));
+        assertTrue(arraysAndStrings.isOneAway("pale", "bale"));
+        assertFalse(arraysAndStrings.isOneAway("pale", "bake"));
+    }
+
+    @Test
+    void testStringCompression() {
+        ArraysAndStrings arraysAndStrings = new ArraysAndStrings();
+        assertEquals("a4b3", arraysAndStrings.stringCompression("aaaabbb"));
+        assertEquals("abcd", arraysAndStrings.stringCompression("abcd"));
+        assertEquals("a2b1c5a3", arraysAndStrings.stringCompression("aabcccccaaa"));
+    }
 }

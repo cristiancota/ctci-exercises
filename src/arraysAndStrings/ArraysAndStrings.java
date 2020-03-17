@@ -47,4 +47,75 @@ class ArraysAndStrings {
         return true;
     }
 
+    boolean isOneAway(String s1, String s2) {
+
+        int diffs = 0;
+
+        if (s1.length() == s2.length()) {
+            for (int i = 0; i < s1.length(); i++) {
+                if (s1.charAt(i) != s2.charAt(i)) {
+                    diffs++;
+                    if (diffs > 1) {
+                        return false;
+                    }
+                }
+            }
+        } else {
+            String longest = s1.length() > s2.length() ? s1 : s2;
+            String shortest = s1.length() < s2.length() ? s1 : s2;
+
+            if (longest.length() - shortest.length() > 1) {
+                return false;
+            }
+
+            int i = 0;
+            int j = 0;
+
+            while (diffs <= 1 && i < longest.length() && j < longest.length()) {
+                if (i == longest.length() - 1 && i == j) {
+                    return true;
+                }
+
+                if (longest.charAt(i) != shortest.charAt(j)) {
+                    if (longest.charAt(i + 1) == shortest.charAt(j)) {
+                        i++;
+                        diffs++;
+                    } else if (longest.charAt(i) == shortest.charAt(j + 1)) {
+                        j++;
+                        diffs++;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    i++;
+                    j++;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    String stringCompression(String str) {
+        int start = 0;
+        int end = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.charAt(i) == str.charAt(i + 1)) {
+                end++;
+            } else {
+                stringBuilder.append(str.charAt(i));
+                stringBuilder.append(end - start + 1);
+                start = i;
+                end = i;
+            }
+        }
+
+        stringBuilder.append(str.charAt(str.length() - 1));
+        stringBuilder.append(end - start + 1);
+
+        return stringBuilder.toString().length() > str.length() ? str : stringBuilder.toString();
+    }
+
 }
