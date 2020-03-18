@@ -97,23 +97,19 @@ class ArraysAndStrings {
     }
 
     String stringCompression(String str) {
-        int start = 0;
-        int end = 0;
         StringBuilder stringBuilder = new StringBuilder();
+        int counter = 1;
 
         for (int i = 0; i < str.length() - 1; i++) {
             if (str.charAt(i) == str.charAt(i + 1)) {
-                end++;
+                counter++;
             } else {
-                stringBuilder.append(str.charAt(i));
-                stringBuilder.append(end - start + 1);
-                start = i;
-                end = i;
+                stringBuilder.append(str.charAt(i)).append(counter);
+                counter = 1;
             }
         }
 
-        stringBuilder.append(str.charAt(str.length() - 1));
-        stringBuilder.append(end - start + 1);
+        stringBuilder.append(str.charAt(str.length() - 1)).append(counter);
 
         return stringBuilder.toString().length() > str.length() ? str : stringBuilder.toString();
     }

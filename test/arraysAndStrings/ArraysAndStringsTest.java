@@ -50,6 +50,7 @@ class ArraysAndStringsTest {
         assertTrue(arraysAndStrings.isOneAway("pale", "ple"));
         assertTrue(arraysAndStrings.isOneAway("pales", "pale"));
         assertTrue(arraysAndStrings.isOneAway("pale", "bale"));
+        assertTrue(arraysAndStrings.isOneAway("bake", "bake"));
         assertFalse(arraysAndStrings.isOneAway("pale", "bake"));
     }
 
@@ -59,5 +60,6 @@ class ArraysAndStringsTest {
         assertEquals("a4b3", arraysAndStrings.stringCompression("aaaabbb"));
         assertEquals("abcd", arraysAndStrings.stringCompression("abcd"));
         assertEquals("a2b1c5a3", arraysAndStrings.stringCompression("aabcccccaaa"));
+        assertEquals("A1a2b1c5a3", arraysAndStrings.stringCompression("Aaabcccccaaa"));
     }
 }
