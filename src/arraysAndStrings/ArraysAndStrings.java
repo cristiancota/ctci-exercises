@@ -114,4 +114,108 @@ class ArraysAndStrings {
         return stringBuilder.toString().length() > str.length() ? str : stringBuilder.toString();
     }
 
+    int[][] rotateMatrix(int[][] matrix) {
+        int aux = 0;
+        int layer = 0;
+        int len = matrix.length;
+        final int iterations = getIterations(len);
+        for (int i = 0; i < iterations; i++) {
+            if (aux == matrix.length - 1 - layer * 2) {
+                layer++;
+                aux = 0;
+            }
+
+            int ax = layer;
+            int ay = layer + aux;
+
+            int bx = layer + aux;
+            int by = len - 1 - layer;
+
+            int cx = len - 1 - layer;
+            int cy = len - 1 - aux - layer;
+
+            int dx = len - 1 - aux - layer;
+            int dy = layer;
+
+            swapFour(matrix, ax, ay, bx, by, cx, cy, dx, dy);
+            aux++;
+        }
+        return matrix;
+    }
+
+    private void swapFour(int[][] matrix, int ax, int ay, int bx, int by, int cx, int cy, int dx, int dy) {
+        int temp = matrix[ax][ay];
+        matrix[ax][ay] = matrix[dx][dy];
+        matrix[dx][dy] = matrix[cx][cy];
+        matrix[cx][cy] = matrix[bx][by];
+        matrix[bx][by] = temp;
+    }
+
+    private int getIterations(int n) {
+        int iterations = (n % 2 == 0) ? 1 : 0;
+        int originalN = n;
+        for (int i = 0; n > 2; i++) {
+            iterations += (originalN - (i * 2)) - 1;
+            n = n - 2;
+        }
+
+        return iterations;
+    }
+
+    int[][] zeroMatrix(int[][] matrix) {
+        int x = -1;
+        int y = -1;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 0) {
+                    x = i;
+                    y = j;
+                    break;
+                }
+            }
+            if (x >= 0) break;
+        }
+
+        if (x >= 0) {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    if (i == x || j == y) {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+        }
+
+        return matrix;
+    }
+
+    boolean stringRotation(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+        if (s1.length() == 0) return false;
+
+        int i = 0;
+        int j = 0;
+
+        while (i < s1.length()) {
+            if (j == s1.length()) {
+                if (i == 0) {
+                    return false;
+                } else {
+                    j = 0;
+                }
+            }
+
+            if (s1.charAt(i) == s2.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                j = j - i + 1;
+                i = 0;
+            }
+
+            if (i == s1.length()) return true;
+        }
+
+        return false;
+    }
 }
