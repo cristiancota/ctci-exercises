@@ -35,6 +35,19 @@ public class LinkedListsTest {
         assertNull(linkedLists.kthToLast(null, 1));
     }
 
+    @Test
+    void testPartition() {
+        LinkedLists linkedLists = new LinkedLists();
+        ListNode expected = createListNode(Arrays.asList(1,2,2,4,3,5));
+        ListNode actual = linkedLists.partition(createListNode(Arrays.asList(1,4,3,2,5,2)), 3);
+        assertTrue(linkedListsAreSame(expected, actual));
+
+        // Not passing ctci example:
+        // input    3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1
+        // output   3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+        // TODO create assertion where every element until x are smaller than X, and after they're equal or greater
+    }
+
     private boolean linkedListsAreSame(ListNode expected, ListNode actual) {
         while (expected != null) {
             if (expected.val != actual.val)
