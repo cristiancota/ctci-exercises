@@ -88,6 +88,16 @@ public class LinkedListsTest {
         assertTrue(linkedListsAreSame(expected, actual));
     }
 
+    @Test
+    void testIsPalindrome() {
+        LinkedLists linkedLists = new LinkedLists();
+        assertTrue(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 2, 3, 2, 1))));
+        assertFalse(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 2, 3))));
+        assertFalse(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 3))));
+        assertTrue(linkedLists.isPalindrome(createListNode(Collections.singletonList(1))));
+        assertTrue(linkedLists.isPalindrome(createListNode(Arrays.asList(1,1,1,1))));
+    }
+
     private boolean linkedListsAreSame(ListNode expected, ListNode actual) {
         while (expected != null) {
             if (expected.val != actual.val)

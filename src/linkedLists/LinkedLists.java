@@ -97,15 +97,15 @@ public class LinkedLists {
         }
     }
 
-    ListNode sumLists(ListNode A, ListNode B) {
+    ListNode sumLists(ListNode headA, ListNode headB) {
         ListNode head = new ListNode(0);
         ListNode result = head;
         ListNode nextHead;
         boolean isBiggerThanNine = false;
 
-        while (A != null || B != null) {
-            int aVal = A != null ? A.val : 0;
-            int bVal = B != null ? B.val : 0;
+        while (headA != null || headB != null) {
+            int aVal = headA != null ? headA.val : 0;
+            int bVal = headB != null ? headB.val : 0;
             int aPlusB = aVal + bVal;
 
             if (isBiggerThanNine) {
@@ -117,10 +117,26 @@ public class LinkedLists {
             nextHead = new ListNode(0);
             head.next = nextHead;
             head = nextHead;
-            A = A == null ? null : A.next;
-            B = B != null ? B.next : null;
+            headA = headA == null ? null : headA.next;
+            headB = headB != null ? headB.next : null;
         }
 
         return result;
+    }
+
+    boolean isPalindrome(ListNode headA) {
+        List<Integer> integers = new ArrayList<Integer>();
+        while (headA != null) {
+            integers.add(headA.val);
+            headA = headA.next;
+        }
+
+        for (int i = 0; i < integers.size(); i++) {
+            if (!integers.get(i).equals(integers.get(integers.size() - 1 - i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
