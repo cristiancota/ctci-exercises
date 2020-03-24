@@ -79,4 +79,48 @@ public class LinkedLists {
 
         return toReturn;
     }
+
+    void deleteMiddleNode(ListNode head) {
+        boolean isFirst = true;
+        ListNode prev = null;
+        while (head != null) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                if (head.next != null) {
+                    prev.next = head.next;
+                    break;
+                }
+            }
+            prev = head;
+            head = head.next;
+        }
+    }
+
+    ListNode sumLists(ListNode A, ListNode B) {
+        ListNode head = new ListNode(0);
+        ListNode result = head;
+        ListNode nextHead;
+        boolean isBiggerThanNine = false;
+
+        while (A != null || B != null) {
+            int aVal = A != null ? A.val : 0;
+            int bVal = B != null ? B.val : 0;
+            int aPlusB = aVal + bVal;
+
+            if (isBiggerThanNine) {
+                aPlusB += 1;
+            }
+
+            isBiggerThanNine = aPlusB > 9;
+            head.val = aPlusB % 10;
+            nextHead = new ListNode(0);
+            head.next = nextHead;
+            head = nextHead;
+            A = A == null ? null : A.next;
+            B = B != null ? B.next : null;
+        }
+
+        return result;
+    }
 }
