@@ -2,10 +2,7 @@ package linkedLists;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import static linkedLists.ListNode.createListNode;
+import static linkedLists.ListNode.createLinkedList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListsTest {
@@ -13,21 +10,21 @@ public class LinkedListsTest {
     @Test
     void testRemoveDuplicated() {
         LinkedLists linkedLists = new LinkedLists();
-        ListNode expected = createListNode(Arrays.asList(1, 2, 3, 4, 5, 6));
-        ListNode actual = linkedLists.removeDups(createListNode(Arrays.asList(1, 2, 3, 4, 2, 5, 6)));
+        ListNode expected = createLinkedList(1, 2, 3, 4, 5, 6);
+        ListNode actual = linkedLists.removeDups(createLinkedList(1, 2, 3, 4, 2, 5, 6));
         assertTrue(linkedListsAreSame(expected, actual));
     }
 
     @Test
     void testKthToLast() {
         LinkedLists linkedLists = new LinkedLists();
-        ListNode expected = createListNode(Arrays.asList(4, 5, 6));
-        ListNode actual = linkedLists.kthToLast(createListNode(Arrays.asList(1, 2, 3, 4, 5, 6)), 4);
+        ListNode expected = createLinkedList(4, 5, 6);
+        ListNode actual = linkedLists.kthToLast(createLinkedList(1, 2, 3, 4, 5, 6), 4);
 
         assertTrue(linkedListsAreSame(expected, actual));
 
-        expected = createListNode(Collections.singletonList(6));
-        actual = linkedLists.kthToLast(createListNode(Arrays.asList(1, 2, 3, 4, 5, 6)), 6);
+        expected = createLinkedList(6);
+        actual = linkedLists.kthToLast(createLinkedList(1, 2, 3, 4, 5, 6), 6);
 
         assertTrue(linkedListsAreSame(expected, actual));
 
@@ -37,19 +34,19 @@ public class LinkedListsTest {
     @Test
     void testPartition() {
         LinkedLists linkedLists = new LinkedLists();
-        ListNode expected = createListNode(Arrays.asList(1, 2, 2, 4, 3, 5));
-        ListNode actual = linkedLists.partition(createListNode(Arrays.asList(1, 4, 3, 2, 5, 2)), 3);
+        ListNode expected = createLinkedList(1, 2, 2, 4, 3, 5);
+        ListNode actual = linkedLists.partition(createLinkedList(1, 4, 3, 2, 5, 2), 3);
         assertTrue(linkedListsAreSame(expected, actual));
 
-        actual = linkedLists.partition(createListNode(Arrays.asList(3, 5, 8, 5, 10, 2, 1)), 5);
+        actual = linkedLists.partition(createLinkedList(3, 5, 8, 5, 10, 2, 1), 5);
         assertTrue(assertPartition(actual, 5));
     }
 
     @Test
     void testDeleteMiddleNode() {
         LinkedLists linkedLists = new LinkedLists();
-        ListNode expected = createListNode(Arrays.asList(1, 3, 4, 5));
-        ListNode actual = createListNode(Arrays.asList(1, 2, 3, 4, 5));
+        ListNode expected = createLinkedList(1, 3, 4, 5);
+        ListNode actual = createLinkedList(1, 2, 3, 4, 5);
 
         assertFalse(linkedListsAreSame(expected, actual));
 
@@ -57,14 +54,14 @@ public class LinkedListsTest {
 
         assertTrue(linkedListsAreSame(expected, actual));
 
-        expected = createListNode(Arrays.asList(1, 2));
-        actual = createListNode(Arrays.asList(1, 2));
+        expected = createLinkedList(1, 2);
+        actual = createLinkedList(1, 2);
         linkedLists.deleteMiddleNode(actual);
 
         assertTrue(linkedListsAreSame(expected, actual));
 
-        expected = createListNode(Arrays.asList(1, 3));
-        actual = createListNode(Arrays.asList(1, 2, 3));
+        expected = createLinkedList(1, 3);
+        actual = createLinkedList(1, 2, 3);
         linkedLists.deleteMiddleNode(actual);
 
         assertTrue(linkedListsAreSame(expected, actual));
@@ -73,16 +70,16 @@ public class LinkedListsTest {
     @Test
     void testSumLists() {
         LinkedLists linkedLists = new LinkedLists();
-        ListNode expected = createListNode(Arrays.asList(2, 1, 9));
-        ListNode first = createListNode(Arrays.asList(7, 1, 6));
-        ListNode second = createListNode(Arrays.asList(5, 9, 2));
+        ListNode expected = createLinkedList(2, 1, 9);
+        ListNode first = createLinkedList(7, 1, 6);
+        ListNode second = createLinkedList(5, 9, 2);
         ListNode actual = linkedLists.sumLists(first, second);
 
         assertTrue(linkedListsAreSame(expected, actual));
 
-        expected = createListNode(Arrays.asList(5, 7, 3, 8));
-        first = createListNode(Arrays.asList(4, 0, 1, 8));
-        second = createListNode(Arrays.asList(1, 7, 2));
+        expected = createLinkedList(5, 7, 3, 8);
+        first = createLinkedList(4, 0, 1, 8);
+        second = createLinkedList(1, 7, 2);
         actual = linkedLists.sumLists(first, second);
 
         assertTrue(linkedListsAreSame(expected, actual));
@@ -91,11 +88,37 @@ public class LinkedListsTest {
     @Test
     void testIsPalindrome() {
         LinkedLists linkedLists = new LinkedLists();
-        assertTrue(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 2, 3, 2, 1))));
-        assertFalse(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 2, 3))));
-        assertFalse(linkedLists.isPalindrome(createListNode(Arrays.asList(1, 3))));
-        assertTrue(linkedLists.isPalindrome(createListNode(Collections.singletonList(1))));
-        assertTrue(linkedLists.isPalindrome(createListNode(Arrays.asList(1,1,1,1))));
+        assertTrue(linkedLists.isPalindrome(createLinkedList(1, 2, 3, 2, 1)));
+        assertFalse(linkedLists.isPalindrome(createLinkedList(1, 2, 3)));
+        assertFalse(linkedLists.isPalindrome(createLinkedList(1, 3)));
+        assertTrue(linkedLists.isPalindrome(createLinkedList(1)));
+        assertTrue(linkedLists.isPalindrome(createLinkedList(1, 1, 1, 1)));
+    }
+
+    @Test
+    void testIntersection() {
+        LinkedLists linkedLists = new LinkedLists();
+
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(3);
+        ListNode d = new ListNode(4);
+        ListNode e = new ListNode(5);
+        ListNode f = new ListNode(6);
+        a.next = b;
+        b.next = c;
+        d.next = e;
+        e.next = c;
+        c.next = f;
+
+        // creating two linked lists intersecting on c
+        // a > b > c < e < d
+        //         v
+        //         f
+
+        assertEquals(c, linkedLists.intersection(a, d));
+
+        assertNull(linkedLists.intersection(createLinkedList(1, 2, 3), createLinkedList(1, 2, 3)));
     }
 
     private boolean linkedListsAreSame(ListNode expected, ListNode actual) {
