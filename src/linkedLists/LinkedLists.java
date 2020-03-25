@@ -139,4 +139,22 @@ public class LinkedLists {
 
         return true;
     }
+
+    ListNode intersection(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+
+        List<ListNode> allNodes = new ArrayList<ListNode>();
+
+        while (headA != null) {
+            allNodes.add(headA);
+            headA = headA.next;
+        }
+
+        while (headB != null) {
+            if (allNodes.contains(headB)) return headB;
+            headB = headB.next;
+        }
+
+        return null;
+    }
 }
