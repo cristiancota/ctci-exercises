@@ -117,8 +117,25 @@ public class LinkedListsTest {
         //         f
 
         assertEquals(c, linkedLists.intersection(a, d));
-
         assertNull(linkedLists.intersection(createLinkedList(1, 2, 3), createLinkedList(1, 2, 3)));
+    }
+    @Test
+    void testLoopDetection() {
+        LinkedLists linkedLists = new LinkedLists();
+
+        ListNode a = new ListNode(1);
+        ListNode b = new ListNode(2);
+        ListNode c = new ListNode(3);
+        ListNode d = new ListNode(4);
+        ListNode e = new ListNode(5);
+        a.next = b;
+        b.next = c;
+        c.next = d;
+        d.next = e;
+        e.next = c;
+
+        assertEquals(c, linkedLists.loopDetection(a));
+        assertNull(linkedLists.loopDetection(createLinkedList(1,2,3,4,5,6,7)));
     }
 
     private boolean linkedListsAreSame(ListNode expected, ListNode actual) {

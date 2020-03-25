@@ -1,5 +1,6 @@
 package linkedLists;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ListNode {
@@ -10,9 +11,10 @@ public class ListNode {
         this.val = val;
     }
 
-    static ListNode createListNode(List<Integer> list) {
-        if (list.isEmpty()) return null;
+    static ListNode createLinkedList(Integer... integers) {
+        if (integers.length == 0) return null;
 
+        List<Integer> list = Arrays.asList(integers);
         ListNode head = new ListNode(list.get(0));
         ListNode el;
         ListNode theList = head;

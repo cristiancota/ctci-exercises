@@ -1,6 +1,7 @@
 package linkedLists;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class LinkedLists {
@@ -155,6 +156,17 @@ public class LinkedLists {
             headB = headB.next;
         }
 
+        return null;
+    }
+
+    ListNode loopDetection(ListNode head) {
+        HashSet<ListNode> listNodes = new HashSet<ListNode>();
+        while (head != null) {
+            if (!listNodes.add(head)) {
+                return head;
+            }
+            head = head.next;
+        }
         return null;
     }
 }
