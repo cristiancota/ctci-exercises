@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StackAndQueues {
-    public List<CStack> threeInOne(int[] array) {
-        List<CStack> result = new ArrayList<>(3);
-        result.add(0, new CStack());
-        result.add(1, new CStack());
-        result.add(2, new CStack());
+    public List<CStack<Integer>> threeInOne(int[] array) {
+        List<CStack<Integer>> result = new ArrayList<>(3);
+        result.add(0, new CStack<>());
+        result.add(1, new CStack<>());
+        result.add(2, new CStack<>());
 
         int first, second;
         int size = array.length;
@@ -22,13 +22,13 @@ public class StackAndQueues {
 
         for (int i = 0; i < size; i++) {
             if (i < first) {
-                CStack cStack = result.get(0);
+                CStack<Integer> cStack = result.get(0);
                 cStack.push(array[i]);
             } else if (i < second) {
-                CStack cStack = result.get(1);
+                CStack<Integer> cStack = result.get(1);
                 cStack.push(array[i]);
             } else {
-                CStack cStack = result.get(2);
+                CStack<Integer> cStack = result.get(2);
                 cStack.push(array[i]);
             }
         }

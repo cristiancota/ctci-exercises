@@ -2,32 +2,32 @@ package stackAndQueues;
 
 import java.util.EmptyStackException;
 
-public class CStack {
+public class CStack<T> {
     class StackNode {
-        int data;
+        T data;
         StackNode next;
 
-        public StackNode(int data) {
+        public StackNode(T data) {
             this.data = data;
         }
     }
 
     private StackNode top;
 
-    public int pop() {
+    public T pop() {
         if (top == null) throw new EmptyStackException();
-        int item = top.data;
+        T item = top.data;
         top = top.next;
         return item;
     }
 
-    public void push(int item) {
+    public void push(T item) {
         StackNode newStackNode = new StackNode(item);
         newStackNode.next = top;
         top = newStackNode;
     }
 
-    public int peek() {
+    public T peek() {
         if (top == null) throw new EmptyStackException();
         return top.data;
     }
