@@ -2,10 +2,12 @@ package stackAndQueues;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StackAndQueuesTest {
 
@@ -54,5 +56,11 @@ class StackAndQueuesTest {
         setOfStacks.push(3);
         setOfStacks.push(4);
         setOfStacks.push(5);
+        setOfStacks.pop();
+        setOfStacks.pop();
+        setOfStacks.pop();
+        setOfStacks.pop();
+        setOfStacks.pop();
+        assertThrows(EmptyStackException.class, setOfStacks::pop);
     }
 }
