@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.EmptyStackException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StackAndQueuesTest {
 
@@ -62,5 +60,23 @@ class StackAndQueuesTest {
         setOfStacks.pop();
         setOfStacks.pop();
         assertThrows(EmptyStackException.class, setOfStacks::pop);
+    }
+
+    @Test
+    public void testQueueViaStack() {
+        QueueViaStack queue = new QueueViaStack();
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+
+        assertEquals(1, queue.remove());
+        assertEquals(2, queue.peek());
+        assertEquals(2, queue.remove());
+        assertEquals(3, queue.remove());
+
+        assertTrue(queue.isEmpty());
+
+        assertThrows(RuntimeException.class, queue::remove);
+        assertThrows(RuntimeException.class, queue::peek);
     }
 }
