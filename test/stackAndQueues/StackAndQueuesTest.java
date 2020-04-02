@@ -104,4 +104,19 @@ class StackAndQueuesTest {
         assertEquals(43, cStack.pop());
         assertEquals(1580, cStack.pop());
     }
+
+    @Test
+    public void testAnimalShelter() {
+        AnimalShelter animalShelter = new AnimalShelter();
+        animalShelter.enqueue(new Dog("dog 1"));
+        animalShelter.enqueue(new Dog("dog 2"));
+        animalShelter.enqueue(new Cat("cat 1"));
+        animalShelter.enqueue(new Dog("dog 3"));
+
+        assertEquals("dog 1", animalShelter.dequeueAny().getName());
+        assertEquals("cat 1", animalShelter.dequeueCat().getName());
+        assertEquals("dog 2", animalShelter.dequeueDog().getName());
+        assertNull(animalShelter.dequeueCat());
+        assertEquals("dog 3", animalShelter.dequeueAny().getName());
+    }
 }
