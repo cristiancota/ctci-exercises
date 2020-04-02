@@ -79,4 +79,29 @@ class StackAndQueuesTest {
         assertThrows(RuntimeException.class, queue::remove);
         assertThrows(RuntimeException.class, queue::peek);
     }
+
+    @Test
+    public void testSort() {
+        StackAndQueues stackAndQueues = new StackAndQueues();
+        CStack<Integer> cStack = new CStack<>();
+        cStack.push(43);
+        cStack.push(9);
+        cStack.push(27);
+        cStack.push(0);
+        cStack.push(3);
+        cStack.push(15);
+        cStack.push(1580);
+
+        assertEquals(1580, cStack.peek());
+
+        stackAndQueues.sort(cStack);
+
+        assertEquals(0, cStack.pop());
+        assertEquals(3, cStack.pop());
+        assertEquals(9, cStack.pop());
+        assertEquals(15, cStack.pop());
+        assertEquals(27, cStack.pop());
+        assertEquals(43, cStack.pop());
+        assertEquals(1580, cStack.pop());
+    }
 }

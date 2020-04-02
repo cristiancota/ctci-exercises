@@ -35,4 +35,26 @@ public class StackAndQueues {
 
         return result;
     }
+
+    public void sort(CStack<Integer> stack) {
+        CStack<Integer> sortedStack = new CStack<>();
+        CStack<Integer> buffer = new CStack<>();
+
+        while (!stack.isEmpty()) {
+            Integer pop = stack.pop();
+
+            while (!sortedStack.isEmpty() && sortedStack.peek() > pop) {
+                buffer.push(sortedStack.pop()); // save in buffer bigger elements than the pop in the sorted stack
+            }
+
+            sortedStack.push(pop);
+            while (!buffer.isEmpty()) {
+                sortedStack.push(buffer.pop()); // return from buffer to sorted stack
+            }
+        }
+
+        while (!sortedStack.isEmpty()) {
+            stack.push(sortedStack.pop());
+        }
+    }
 }
