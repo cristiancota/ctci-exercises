@@ -32,7 +32,7 @@ class TreesAndGraphs {
         System.out.println(treeNode.value);
     }
 
-    boolean routeBetweenNodes(GraphNode n1, GraphNode n2) {
+    boolean isRouteBetweenNodes(GraphNode n1, GraphNode n2) {
         HashSet<Integer> visited = new HashSet<>();
         return doSearch(n1, n2, visited);
     }

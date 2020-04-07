@@ -1,9 +1,9 @@
 package treesAndGraphs;
 
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TreesAndGraphsTest {
 
@@ -63,9 +63,47 @@ class TreesAndGraphsTest {
         adjacent5[0] = node1;
         node5.adjacent = adjacent5;
 
-        assertTrue(treesAndGraphs.routeBetweenNodes(node1, node2));
-        assertFalse(treesAndGraphs.routeBetweenNodes(node4, node2));
-        assertTrue(treesAndGraphs.routeBetweenNodes(node5, node4));
-        assertTrue(treesAndGraphs.routeBetweenNodes(node3, node2));
+        assertTrue(treesAndGraphs.isRouteBetweenNodes(node1, node2));
+        assertFalse(treesAndGraphs.isRouteBetweenNodes(node4, node2));
+        assertTrue(treesAndGraphs.isRouteBetweenNodes(node5, node4));
+        assertTrue(treesAndGraphs.isRouteBetweenNodes(node3, node2));
+    }
+
+    @Test
+    void testAssertTreesAreTheSame() {
+        TreeNode actual = TreeNode.createTree(new int[]{1, 2, 3});
+        TreeNode expected = new TreeNode(1);
+        expected.left = new TreeNode(2);
+        expected.right = new TreeNode(3);
+
+        treesAreTheSame(expected, actual);
+
+        assertThrows(AssertionFailedError.class, () -> {
+            TreeNode expectedToFail = new TreeNode(1);
+            TreeNode actualToFail = TreeNode.createTree(new int[]{1, 2, 3, 4, 5});
+            treesAreTheSame(expectedToFail, actualToFail);
+        });
+
+        assertThrows(AssertionFailedError.class, () -> {
+            TreeNode expectedToFail = new TreeNode(1);
+            TreeNode actualToFail = TreeNode.createTree(new int[]{2});
+            treesAreTheSame(expectedToFail, actualToFail);
+        });
+    }
+
+    private void treesAreTheSame(TreeNode expected, TreeNode actual) {
+        if (expected == null && actual != null) {
+            throw new AssertionFailedError("Expected is null and actual has value", null, actual.value);
+        }
+
+        if (actual == null && expected != null) {
+            throw new AssertionFailedError("Actual is null and expected has value", expected.value, null);
+        }
+
+        if (actual != null) {
+            assertEquals(expected.value, actual.value);
+            treesAreTheSame(expected.left, actual.left);
+            treesAreTheSame(expected.right, actual.right);
+        }
     }
 }
