@@ -3,6 +3,8 @@ package treesAndGraphs;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TreesAndGraphsTest {
@@ -70,6 +72,76 @@ class TreesAndGraphsTest {
     }
 
     @Test
+    void testMinimalTree() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        TreeNode actual = treesAndGraphs.minimalTree(new int[]{1, 2, 3, 4, 5});
+        TreeNode expected = new TreeNode(3);
+        expected.left = new TreeNode(1);
+        expected.left.right = new TreeNode(2);
+        expected.right = new TreeNode(4);
+        expected.right.right = new TreeNode(5);
+
+        treesAreTheSame(expected, actual);
+    }
+
+    @Test
+    void testListOfDepths() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        TreeNode tree = TreeNode.createTree(new int[]{1, 2, 3, 4, 5, 6, 7});
+        List<LinkedList<Integer>> actual = treesAndGraphs.listOfDepths(tree);
+
+        List<LinkedList<Integer>> expected = new ArrayList<>();
+        expected.add(new LinkedList<>(Collections.singletonList(1)));
+        expected.add(new LinkedList<>(Arrays.asList(2, 3)));
+        expected.add(new LinkedList<>(Arrays.asList(4, 5, 6, 7)));
+
+        assertEquals(expected.size(), actual.size());
+        assertLinkedListsEquals(expected, actual);
+
+        tree = new TreeNode(3);
+        tree.left = new TreeNode(1);
+        tree.left.right = new TreeNode(2);
+        tree.right = new TreeNode(4);
+        tree.right.right = new TreeNode(5);
+
+        actual = treesAndGraphs.listOfDepths(tree);
+
+        expected = new ArrayList<>();
+        expected.add(new LinkedList<>(Collections.singletonList(3)));
+        expected.add(new LinkedList<>(Arrays.asList(1, 4)));
+        expected.add(new LinkedList<>(Arrays.asList(2, 5)));
+
+        assertEquals(expected.size(), actual.size());
+        assertLinkedListsEquals(expected, actual);
+    }
+
+    private void assertLinkedListsEquals(List<LinkedList<Integer>> expected, List<LinkedList<Integer>> actual) {
+        for (int i = 0; i < expected.size(); i++) {
+            LinkedList<Integer> currentExpected = expected.get(i);
+            LinkedList<Integer> currentActual = actual.get(i);
+            while ((currentExpected.peek() != null && currentActual.peek() != null)) {
+                assertEquals(currentExpected.pop(), currentActual.pop());
+            }
+        }
+    }
+
+    private void treesAreTheSame(TreeNode expected, TreeNode actual) {
+        if (expected == null && actual != null) {
+            throw new AssertionFailedError("Expected is null and actual has value", null, actual.value);
+        }
+
+        if (actual == null && expected != null) {
+            throw new AssertionFailedError("Actual is null and expected has value", expected.value, null);
+        }
+
+        if (actual != null) {
+            assertEquals(expected.value, actual.value);
+            treesAreTheSame(expected.left, actual.left);
+            treesAreTheSame(expected.right, actual.right);
+        }
+    }
+
+    @Test
     void testAssertTreesAreTheSame() {
         TreeNode actual = TreeNode.createTree(new int[]{1, 2, 3});
         TreeNode expected = new TreeNode(1);
@@ -89,21 +161,5 @@ class TreesAndGraphsTest {
             TreeNode actualToFail = TreeNode.createTree(new int[]{2});
             treesAreTheSame(expectedToFail, actualToFail);
         });
-    }
-
-    private void treesAreTheSame(TreeNode expected, TreeNode actual) {
-        if (expected == null && actual != null) {
-            throw new AssertionFailedError("Expected is null and actual has value", null, actual.value);
-        }
-
-        if (actual == null && expected != null) {
-            throw new AssertionFailedError("Actual is null and expected has value", expected.value, null);
-        }
-
-        if (actual != null) {
-            assertEquals(expected.value, actual.value);
-            treesAreTheSame(expected.left, actual.left);
-            treesAreTheSame(expected.right, actual.right);
-        }
     }
 }

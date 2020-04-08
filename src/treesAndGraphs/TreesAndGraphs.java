@@ -1,6 +1,9 @@
 package treesAndGraphs;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 class TreesAndGraphs {
 
@@ -55,6 +58,44 @@ class TreesAndGraphs {
         }
 
         return false;
+    }
+
+    TreeNode minimalTree(int[] nums) {
+        return buildMinimalTree(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode buildMinimalTree(int[] nums, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        TreeNode node;
+
+        node = new TreeNode(nums[mid]);
+        node.left = buildMinimalTree(nums, start, mid - 1);
+        node.right = buildMinimalTree(nums, mid + 1, end);
+
+        return node;
+    }
+
+    List<LinkedList<Integer>> listOfDepths(TreeNode tree) {
+        List<LinkedList<Integer>> list = new ArrayList<>();
+        if (tree != null)
+            listOfDepths(0, list, tree);
+
+        return list;
+    }
+
+    private void listOfDepths(int index, List<LinkedList<Integer>> list, TreeNode node) {
+        if (node != null) {
+            if (index >= list.size())
+                list.add(new LinkedList<>());
+
+            list.get(index).add(node.value);
+            listOfDepths(index + 1, list, node.left);
+            listOfDepths(index + 1, list, node.right);
+        }
     }
 
 }
