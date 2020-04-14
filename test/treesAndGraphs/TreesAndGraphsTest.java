@@ -6,6 +6,7 @@ import org.opentest4j.AssertionFailedError;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static treesAndGraphs.TreeNode.createTree;
 
 class TreesAndGraphsTest {
 
@@ -87,7 +88,7 @@ class TreesAndGraphsTest {
     @Test
     void testListOfDepths() {
         TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
-        TreeNode tree = TreeNode.createTree(new int[]{1, 2, 3, 4, 5, 6, 7});
+        TreeNode tree = createTree(new int[]{1, 2, 3, 4, 5, 6, 7});
         List<LinkedList<Integer>> actual = treesAndGraphs.listOfDepths(tree);
 
         List<LinkedList<Integer>> expected = new ArrayList<>();
@@ -143,7 +144,7 @@ class TreesAndGraphsTest {
 
     @Test
     void testAssertTreesAreTheSame() {
-        TreeNode actual = TreeNode.createTree(new int[]{1, 2, 3});
+        TreeNode actual = createTree(new int[]{1, 2, 3});
         TreeNode expected = new TreeNode(1);
         expected.left = new TreeNode(2);
         expected.right = new TreeNode(3);
@@ -152,14 +153,32 @@ class TreesAndGraphsTest {
 
         assertThrows(AssertionFailedError.class, () -> {
             TreeNode expectedToFail = new TreeNode(1);
-            TreeNode actualToFail = TreeNode.createTree(new int[]{1, 2, 3, 4, 5});
+            TreeNode actualToFail = createTree(new int[]{1, 2, 3, 4, 5});
             treesAreTheSame(expectedToFail, actualToFail);
         });
 
         assertThrows(AssertionFailedError.class, () -> {
             TreeNode expectedToFail = new TreeNode(1);
-            TreeNode actualToFail = TreeNode.createTree(new int[]{2});
+            TreeNode actualToFail = createTree(new int[]{2});
             treesAreTheSame(expectedToFail, actualToFail);
         });
+    }
+
+    @Test
+    void testIsBalanced() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        TreeNode tree = new TreeNode(1);
+        assertTrue(treesAndGraphs.isBalanced(tree));
+        assertTrue(treesAndGraphs.isBalanced(createTree(new int[]{1, 2, 3, 4})));
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+
+        assertFalse(treesAndGraphs.isBalanced(root));
+
     }
 }

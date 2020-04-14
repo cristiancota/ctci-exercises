@@ -98,4 +98,17 @@ class TreesAndGraphs {
         }
     }
 
+    boolean isBalanced(TreeNode tree) {
+        int leftDepth = getDepth(tree.left);
+        int rightDepth = getDepth(tree.right);
+
+        return Math.abs(leftDepth - rightDepth) < 2;
+    }
+
+    private int getDepth(TreeNode node) {
+        if (node == null)
+            return 0;
+
+        return Math.max(getDepth(node.left), getDepth(node.right)) + 1;
+    }
 }
