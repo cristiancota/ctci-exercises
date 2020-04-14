@@ -111,4 +111,21 @@ class TreesAndGraphs {
 
         return Math.max(getDepth(node.left), getDepth(node.right)) + 1;
     }
+
+    boolean validateBST(TreeNode tree) {
+        return isBST(tree, null, null);
+    }
+
+    private boolean isBST(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) {
+            return true;
+        }
+
+        int val = node.value;
+
+        if (lower != null && val <= lower) return false;
+        if (upper != null && val >= upper) return false;
+        if (!isBST(node.left, lower, val)) return false;
+        return isBST(node.right, val, upper);
+    }
 }

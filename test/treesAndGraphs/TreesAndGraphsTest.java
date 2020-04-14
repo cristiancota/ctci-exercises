@@ -179,6 +179,40 @@ class TreesAndGraphsTest {
         root.left.right.right = new TreeNode(6);
 
         assertFalse(treesAndGraphs.isBalanced(root));
+    }
 
+    @Test
+    void testIsBinarySearchTree() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        assertFalse(treesAndGraphs.validateBST(createTree(new int[]{1, 2, 3, 4})));
+        assertTrue(treesAndGraphs.validateBST(createTree(new int[]{2, 1, 3})));
+        assertTrue(treesAndGraphs.validateBST(createTree(new int[]{20, 10, 24, 1, 15, 22, 50})));
+
+        TreeNode root = new TreeNode(20);
+        root.left = new TreeNode(10);
+        root.right = new TreeNode(24);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(15);
+        root.right.left = new TreeNode(22);
+        root.right.right = new TreeNode(50);
+        root.right.right.left = new TreeNode(48);
+
+        assertTrue(treesAndGraphs.validateBST(root));
+
+        root = new TreeNode(1);
+        root.left = new TreeNode(1);
+
+        assertFalse(treesAndGraphs.validateBST(root));
+
+        root = new TreeNode(20);
+        root.left = new TreeNode(10);
+        root.right = new TreeNode(24);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(15);
+        root.right.left = new TreeNode(22);
+        root.right.right = new TreeNode(50);
+        root.right.right.left = new TreeNode(3);
+
+        assertFalse(treesAndGraphs.validateBST(root));
     }
 }
