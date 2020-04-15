@@ -215,4 +215,50 @@ class TreesAndGraphsTest {
 
         assertFalse(treesAndGraphs.validateBST(root));
     }
+
+    @Test
+    void testRecursion() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        int[] array = treesAndGraphs.recursion();
+        assertNotNull(array);
+    }
+
+    @Test
+    void testSuccessor() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+
+        TreeNode root = new TreeNode(20);
+        root.left = new TreeNode(10);
+        root.right = new TreeNode(24);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(15);
+        root.right.left = new TreeNode(22);
+        root.right.right = new TreeNode(50);
+
+        int successor = treesAndGraphs.successor(root, 15);
+        assertEquals(20, successor);
+
+        successor = treesAndGraphs.successor(root, 24);
+        assertEquals(50, successor);
+
+        successor = treesAndGraphs.successor(root, 1);
+        assertEquals(10, successor);
+
+        root = new TreeNode(20);
+        root.left = new TreeNode(8);
+        root.right = new TreeNode(22);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(12);
+        root.left.right.left = new TreeNode(10);
+        root.left.right.right = new TreeNode(14);
+
+        successor = treesAndGraphs.successor(root, 8);
+        assertEquals(10, successor);
+
+        successor = treesAndGraphs.successor(root, 10);
+        assertEquals(12, successor);
+
+        successor = treesAndGraphs.successor(root, 14);
+        assertEquals(20, successor);
+    }
 }

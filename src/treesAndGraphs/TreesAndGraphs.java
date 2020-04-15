@@ -128,4 +128,45 @@ class TreesAndGraphs {
         if (!isBST(node.left, lower, val)) return false;
         return isBST(node.right, val, upper);
     }
+
+    int[] recursion() {
+        int index = 0;
+        int[] ints = new int[10];
+
+        return callRecursion(ints, index);
+    }
+
+    private int[] callRecursion(int[] ints, int index) {
+        if (index >= 10) {
+            return ints;
+        }
+
+        ints[index] = index + 1;
+        callRecursion(ints, index + 1);
+
+        return ints;
+    }
+
+    int successor(TreeNode tree, int x) {
+        return successor(tree, x, -1);
+    }
+
+    private int successor(TreeNode node, int x, int result) {
+        if (node != null) {
+            result = successor(node.left, x, result);
+
+            if (result != -1) {
+                if (result == Integer.MAX_VALUE)
+                    return node.value;
+                else
+                    return result;
+            }
+
+            if (node.value == x)
+                result = Integer.MAX_VALUE;
+
+            result = successor(node.right, x, result);
+        }
+        return result;
+    }
 }
