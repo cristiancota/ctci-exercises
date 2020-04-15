@@ -169,7 +169,12 @@ class TreesAndGraphsTest {
         TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
         TreeNode tree = new TreeNode(1);
         assertTrue(treesAndGraphs.isBalanced(tree));
-        assertTrue(treesAndGraphs.isBalanced(createTree(new int[]{1, 2, 3, 4})));
+
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(4);
+
+        assertTrue(treesAndGraphs.isBalanced(tree));
 
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
@@ -217,13 +222,6 @@ class TreesAndGraphsTest {
     }
 
     @Test
-    void testRecursion() {
-        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
-        int[] array = treesAndGraphs.recursion();
-        assertNotNull(array);
-    }
-
-    @Test
     void testSuccessor() {
         TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
 
@@ -260,5 +258,15 @@ class TreesAndGraphsTest {
 
         successor = treesAndGraphs.successor(root, 14);
         assertEquals(20, successor);
+    }
+
+    @Test
+    void testBuildOrder() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        String[] array = treesAndGraphs.buildOrder(new String[]{"a", "b", "c", "d", "e", "f"}, new String[][]{
+                {"a", "d"}, {"f", "b"}, {"b", "d"}, {"f", "a"}, {"d", "c"}
+        });
+
+        assertArrayEquals(new String[]{"e", "f", "a", "b", "d", "c"}, array);
     }
 }

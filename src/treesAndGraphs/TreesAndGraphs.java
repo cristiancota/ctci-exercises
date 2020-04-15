@@ -1,9 +1,6 @@
 package treesAndGraphs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 class TreesAndGraphs {
 
@@ -129,24 +126,6 @@ class TreesAndGraphs {
         return isBST(node.right, val, upper);
     }
 
-    int[] recursion() {
-        int index = 0;
-        int[] ints = new int[10];
-
-        return callRecursion(ints, index);
-    }
-
-    private int[] callRecursion(int[] ints, int index) {
-        if (index >= 10) {
-            return ints;
-        }
-
-        ints[index] = index + 1;
-        callRecursion(ints, index + 1);
-
-        return ints;
-    }
-
     int successor(TreeNode tree, int x) {
         return successor(tree, x, -1);
     }
@@ -168,5 +147,45 @@ class TreesAndGraphs {
             result = successor(node.right, x, result);
         }
         return result;
+    }
+
+    String[] buildOrder(String[] projects, String[][] dependencies) {
+
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        for (String project : projects) {
+            map.put(project, Collections.emptyList());
+        }
+
+        for (String[] pair : dependencies) {
+            String dependency = pair[0];
+            String project = pair[1];
+            ArrayList<String> strings = new ArrayList<>(map.get(project));
+            strings.add(dependency);
+            map.put(project, strings);
+        }
+
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+            Queue<String> queue = new LinkedList<>(entry.getValue());
+            List<String> finalDependencies = new ArrayList<>();
+            while (!queue.isEmpty()) {
+                String current = queue.remove();
+                finalDependencies.add(current);
+                List<String> strings = map.get(current);
+                if (strings != null) {
+                    queue.addAll(strings);
+                }
+            }
+
+            map.put(entry.getKey(), finalDependencies);
+        }
+
+        LinkedHashSet<String> sorted = new LinkedHashSet<>();
+
+        map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.comparingInt(List::size)))
+                .forEachOrdered(x -> sorted.add(x.getKey()));
+
+        return sorted.toArray(new String[0]);
     }
 }
