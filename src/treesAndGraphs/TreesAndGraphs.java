@@ -150,7 +150,6 @@ class TreesAndGraphs {
     }
 
     String[] buildOrder(String[] projects, String[][] dependencies) {
-
         HashMap<String, List<String>> map = new HashMap<>();
 
         for (String project : projects) {
@@ -187,5 +186,51 @@ class TreesAndGraphs {
                 .forEachOrdered(x -> sorted.add(x.getKey()));
 
         return sorted.toArray(new String[0]);
+    }
+
+    int findCommonAncestor(TreeNode tree, int a, int b) {
+        return commonAncestorHelper(tree, a, b);
+    }
+
+    private int commonAncestorHelper(TreeNode node, int a, int b) {
+        // TODO complete this.
+        return -1;
+    }
+
+    List<Integer> getParents(TreeNode tree, int x) {
+        return getParentsHelper(tree, x);
+    }
+
+    private List<Integer> getParentsHelper(TreeNode node, int x) {
+        List<Integer> result = null;
+
+        if (node != null) {
+            result = getParentsHelper(node.left, x);
+
+            if (node.value == x)
+                return new ArrayList<>();
+
+            result = getParentsHelper(node.right, x) == null ? result : getParentsHelper(node.right, x);
+
+            if (result != null)
+                result.add(node.value);
+        }
+
+        return result;
+    }
+
+    boolean treesAreTheSame(TreeNode a, TreeNode b) {
+        return sameHelper(a, b);
+    }
+
+    private boolean sameHelper(TreeNode a, TreeNode b) {
+        if (a != null && b != null) {
+            if (a.value != b.value) return false;
+
+            return sameHelper(a.left, b.left) && sameHelper(a.right, b.right);
+        }
+
+        if (a == null && b != null) return false;
+        return a == null;
     }
 }

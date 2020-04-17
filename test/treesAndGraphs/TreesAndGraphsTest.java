@@ -269,4 +269,82 @@ class TreesAndGraphsTest {
 
         assertArrayEquals(new String[]{"e", "f", "a", "b", "d", "c"}, array);
     }
+
+    @Test
+    void testFindCommonAncestor() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(4);
+        tree.left.right = new TreeNode(5);
+        tree.right.left = new TreeNode(6);
+        tree.right.right = new TreeNode(7);
+        tree.left.left.left = new TreeNode(8);
+        tree.left.left.right = new TreeNode(9);
+        tree.right.left.right = new TreeNode(10);
+
+//        assertEquals(3, treesAndGraphs.findCommonAncestor(tree, 10, 7));
+//        assertEquals(1, treesAndGraphs.findCommonAncestor(tree, 8, 2));
+//        assertEquals(2, treesAndGraphs.findCommonAncestor(tree, 5, 8));
+    }
+
+    @Test
+    void testGetParents() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(4);
+        tree.left.right = new TreeNode(5);
+        tree.right.left = new TreeNode(6);
+        tree.right.right = new TreeNode(7);
+        tree.right.right.right = new TreeNode(10);
+
+        assertEquals(Arrays.asList(2, 1), treesAndGraphs.getParents(tree, 5));
+        assertEquals(Arrays.asList(3, 1), treesAndGraphs.getParents(tree, 7));
+        assertEquals(Arrays.asList(7, 3, 1), treesAndGraphs.getParents(tree, 10));
+    }
+
+    @Test
+    void testTreesAreTheSame(){
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        assertTrue(treesAndGraphs.treesAreTheSame(new TreeNode(1), new TreeNode(1)));
+        assertFalse(treesAndGraphs.treesAreTheSame(new TreeNode(1), new TreeNode(2)));
+
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.left.left = new TreeNode(4);
+        tree.left.right = new TreeNode(5);
+        tree.right.left = new TreeNode(6);
+        tree.right.right = new TreeNode(7);
+        tree.right.right.right = new TreeNode(10);
+
+        assertTrue(treesAndGraphs.treesAreTheSame(tree, tree));
+
+        TreeNode tree2 = new TreeNode(1);
+        tree2.left = new TreeNode(2);
+        tree2.right = new TreeNode(3);
+        tree2.left.left = new TreeNode(4);
+        tree2.left.right = new TreeNode(5);
+        tree2.right.left = new TreeNode(6);
+        tree2.right.right = new TreeNode(7);
+        tree2.right.right.right = new TreeNode(11);
+
+        assertFalse(treesAndGraphs.treesAreTheSame(tree, tree2));
+
+        // TODO Complete this case
+//        TreeNode original = new TreeNode(1);
+//        original.left = new TreeNode(2);
+//        original.right = new TreeNode(3);
+//
+//        TreeNode inverted = new TreeNode(1);
+//        inverted.left = new TreeNode(3);
+//        inverted.right = new TreeNode(2);
+//
+//        assertTrue(treesAndGraphs.treesAreTheSame(original, inverted));
+    }
 }
