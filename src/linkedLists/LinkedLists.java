@@ -8,7 +8,7 @@ public class LinkedLists {
     ListNode removeDups(ListNode head) {
         if (head == null) return null;
 
-        ArrayList<Integer> integers = new ArrayList<Integer>();
+        ArrayList<Integer> integers = new ArrayList<>();
         ListNode finalList = null;
         ListNode current = new ListNode(head.val);
 
@@ -40,8 +40,8 @@ public class LinkedLists {
     }
 
     ListNode partition(ListNode head, int x) {
-        List<Integer> smallers = new ArrayList<Integer>();
-        List<Integer> greaters = new ArrayList<Integer>();
+        List<Integer> smallers = new ArrayList<>();
+        List<Integer> greaters = new ArrayList<>();
 
         while (head != null) {
             if (head.val < x) {
@@ -126,7 +126,7 @@ public class LinkedLists {
     }
 
     boolean isPalindrome(ListNode headA) {
-        List<Integer> integers = new ArrayList<Integer>();
+        List<Integer> integers = new ArrayList<>();
         while (headA != null) {
             integers.add(headA.val);
             headA = headA.next;
@@ -144,7 +144,7 @@ public class LinkedLists {
     ListNode intersection(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
 
-        List<ListNode> allNodes = new ArrayList<ListNode>();
+        List<ListNode> allNodes = new ArrayList<>();
 
         while (headA != null) {
             allNodes.add(headA);
@@ -160,7 +160,7 @@ public class LinkedLists {
     }
 
     ListNode loopDetection(ListNode head) {
-        HashSet<ListNode> listNodes = new HashSet<ListNode>();
+        HashSet<ListNode> listNodes = new HashSet<>();
         while (head != null) {
             if (!listNodes.add(head)) {
                 return head;

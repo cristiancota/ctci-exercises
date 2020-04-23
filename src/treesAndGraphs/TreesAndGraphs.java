@@ -189,28 +189,41 @@ class TreesAndGraphs {
     }
 
     int findCommonAncestor(TreeNode tree, int a, int b) {
-        return commonAncestorHelper(tree, a, b);
+        List<Integer> parentsA = getParents(tree, a);
+        List<Integer> parentsB = getParents(tree, b);
+
+        if (parentsB.contains(a))
+            return a;
+
+        if (parentsA.contains(b))
+            return b;
+
+        Collections.reverse(parentsA);
+        Collections.reverse(parentsB);
+
+        int commonAncestor = tree.value;
+
+        for (int i = 0; i < Math.min(parentsA.size(), parentsB.size()); i++) {
+            if (parentsA.get(i).equals(parentsB.get(i))) {
+                commonAncestor = parentsA.get(i);
+            } else {
+                return commonAncestor;
+            }
+        }
+
+        return commonAncestor;
     }
 
-    private int commonAncestorHelper(TreeNode node, int a, int b) {
-        // TODO complete this.
-        return -1;
-    }
-
-    List<Integer> getParents(TreeNode tree, int x) {
-        return getParentsHelper(tree, x);
-    }
-
-    private List<Integer> getParentsHelper(TreeNode node, int x) {
+    List<Integer> getParents(TreeNode node, int x) {
         List<Integer> result = null;
 
         if (node != null) {
-            result = getParentsHelper(node.left, x);
+            result = getParents(node.left, x);
 
             if (node.value == x)
                 return new ArrayList<>();
 
-            result = getParentsHelper(node.right, x) == null ? result : getParentsHelper(node.right, x);
+            result = getParents(node.right, x) == null ? result : getParents(node.right, x);
 
             if (result != null)
                 result.add(node.value);

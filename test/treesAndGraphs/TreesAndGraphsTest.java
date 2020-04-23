@@ -285,9 +285,22 @@ class TreesAndGraphsTest {
         tree.left.left.right = new TreeNode(9);
         tree.right.left.right = new TreeNode(10);
 
-//        assertEquals(3, treesAndGraphs.findCommonAncestor(tree, 10, 7));
-//        assertEquals(1, treesAndGraphs.findCommonAncestor(tree, 8, 2));
-//        assertEquals(2, treesAndGraphs.findCommonAncestor(tree, 5, 8));
+        assertEquals(3, treesAndGraphs.findCommonAncestor(tree, 10, 7));
+        assertEquals(2, treesAndGraphs.findCommonAncestor(tree, 8, 2));
+        assertEquals(2, treesAndGraphs.findCommonAncestor(tree, 5, 8));
+
+        TreeNode tree2 = new TreeNode(3);
+        tree2.left = new TreeNode(5);
+        tree2.right = new TreeNode(1);
+        tree2.left.left = new TreeNode(6);
+        tree2.left.right = new TreeNode(2);
+        tree2.right.left = new TreeNode(0);
+        tree2.right.right = new TreeNode(8);
+        tree2.left.right.left = new TreeNode(7);
+        tree2.left.right.right = new TreeNode(4);
+
+        assertEquals(3, treesAndGraphs.findCommonAncestor(tree2, 6, 0));
+        assertEquals(3, treesAndGraphs.findCommonAncestor(tree2, 7, 8));
     }
 
     @Test
@@ -309,7 +322,7 @@ class TreesAndGraphsTest {
     }
 
     @Test
-    void testTreesAreTheSame(){
+    void testTreesAreTheSame() {
         TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
         assertTrue(treesAndGraphs.treesAreTheSame(new TreeNode(1), new TreeNode(1)));
         assertFalse(treesAndGraphs.treesAreTheSame(new TreeNode(1), new TreeNode(2)));
