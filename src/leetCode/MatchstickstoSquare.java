@@ -1,7 +1,9 @@
 package leetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class MatchstickstoSquare {
@@ -16,34 +18,48 @@ public class MatchstickstoSquare {
 
         if (list[0] > goal) return false;
 
-        for (int i = 0; i < 4; i++) {
-            int current = list[i];
-            if (current == goal) {
-                continue;
-            }
+        List<Integer> missingIntegers = new ArrayList<>();
+        List<Integer> remainingIntegers = new ArrayList<>();
 
-            for (int j = 4; j < list.length; j++) {
-                if (current + list[j] == goal) {
-                    list[j] = 0;
-                    list[i] = goal;
-                    break;
+        for (int i = 0; i < list.length; i++) {
+            if (i < 4) {
+                if (list[i] < goal) {
+                    missingIntegers.add(goal - list[i]);
                 }
-
-                if (j == list.length - 1) {
-                    for (int k = 4; k < list.length; k++) {
-                        if (list[k] > 0 && current + list[k] < goal) {
-                            list[i] = current + list[k];
-                            list[k] = 0;
-                            i--;
-                            break;
-                        }
-
-                        if (k == list.length - 1) return false;
-                    }
-                }
+            } else {
+                remainingIntegers.add(list[i]);
             }
         }
 
-        return true;
+        return includesMissing(missingIntegers, remainingIntegers);
+    }
+
+    boolean includesMissing(List<Integer> missingIntegers, List<Integer> remainingIntegers) {
+        if (remainingIntegers.size() < missingIntegers.size()) return false;
+        if (missingIntegers.size() == 1) {
+            return remainingIntegers.stream().mapToInt(Integer::intValue).sum() == missingIntegers.get(0);
+        }
+
+        for (int i = 0; i < missingIntegers.size(); i++) {
+            Integer currentMissing = missingIntegers.get(i);
+            if (remainingIntegers.contains(currentMissing)) {
+                missingIntegers.set(i, 0);
+                remainingIntegers.remove(currentMissing);
+            }
+        }
+
+        int counter = (int) missingIntegers.stream().filter(integer -> integer > 0).count();
+        if (counter == 0 && remainingIntegers.size() == 0) return true;
+
+        Collections.sort(missingIntegers);
+        Collections.reverse(missingIntegers);
+        List<Integer> newMissing = counter == 1 ? Collections.singletonList(missingIntegers.get(0)) : new ArrayList<>();
+        List<Integer> newRemaining = counter == 1 ? remainingIntegers : remainingIntegers.subList(counter, remainingIntegers.size());
+
+        for (int i = 0; i < missingIntegers.size() && missingIntegers.get(i) > 0 && counter > 1; i++) {
+            newMissing.add(missingIntegers.get(i) - remainingIntegers.get(i));
+        }
+
+        return includesMissing(newMissing, newRemaining);
     }
 }
