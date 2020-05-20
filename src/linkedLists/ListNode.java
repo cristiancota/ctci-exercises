@@ -11,7 +11,7 @@ public class ListNode {
         this.val = val;
     }
 
-    static ListNode createLinkedList(Integer... integers) {
+    public static ListNode createLinkedList(Integer... integers) {
         if (integers.length == 0) return null;
 
         List<Integer> list = Arrays.asList(integers);

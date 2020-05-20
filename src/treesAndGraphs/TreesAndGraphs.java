@@ -29,7 +29,7 @@ class TreesAndGraphs {
     }
 
     void visitNode(TreeNode treeNode) {
-        System.out.println(treeNode.value);
+        System.out.println(treeNode.val);
     }
 
     boolean isRouteBetweenNodes(GraphNode n1, GraphNode n2) {
@@ -89,7 +89,7 @@ class TreesAndGraphs {
             if (index >= list.size())
                 list.add(new LinkedList<>());
 
-            list.get(index).add(node.value);
+            list.get(index).add(node.val);
             listOfDepths(index + 1, list, node.left);
             listOfDepths(index + 1, list, node.right);
         }
@@ -118,7 +118,7 @@ class TreesAndGraphs {
             return true;
         }
 
-        int val = node.value;
+        int val = node.val;
 
         if (lower != null && val <= lower) return false;
         if (upper != null && val >= upper) return false;
@@ -136,12 +136,12 @@ class TreesAndGraphs {
 
             if (result != -1) {
                 if (result == Integer.MAX_VALUE)
-                    return node.value;
+                    return node.val;
                 else
                     return result;
             }
 
-            if (node.value == x)
+            if (node.val == x)
                 result = Integer.MAX_VALUE;
 
             result = successor(node.right, x, result);
@@ -201,7 +201,7 @@ class TreesAndGraphs {
         Collections.reverse(parentsA);
         Collections.reverse(parentsB);
 
-        int commonAncestor = tree.value;
+        int commonAncestor = tree.val;
 
         for (int i = 0; i < Math.min(parentsA.size(), parentsB.size()); i++) {
             if (parentsA.get(i).equals(parentsB.get(i))) {
@@ -220,13 +220,13 @@ class TreesAndGraphs {
         if (node != null) {
             result = getParents(node.left, x);
 
-            if (node.value == x)
+            if (node.val == x)
                 return new ArrayList<>();
 
             result = getParents(node.right, x) == null ? result : getParents(node.right, x);
 
             if (result != null)
-                result.add(node.value);
+                result.add(node.val);
         }
 
         return result;
@@ -238,12 +238,16 @@ class TreesAndGraphs {
 
     private boolean sameHelper(TreeNode a, TreeNode b) {
         if (a != null && b != null) {
-            if (a.value != b.value) return false;
+            if (a.val != b.val) return false;
 
             return sameHelper(a.left, b.left) && sameHelper(a.right, b.right);
         }
 
         if (a == null && b != null) return false;
         return a == null;
+    }
+
+    List<int[]> BSTSequence(TreeNode tree) { // TODO start this one
+        return null;
     }
 }

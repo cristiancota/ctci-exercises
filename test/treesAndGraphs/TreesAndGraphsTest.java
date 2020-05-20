@@ -128,15 +128,15 @@ class TreesAndGraphsTest {
 
     private void treesAreTheSame(TreeNode expected, TreeNode actual) {
         if (expected == null && actual != null) {
-            throw new AssertionFailedError("Expected is null and actual has value", null, actual.value);
+            throw new AssertionFailedError("Expected is null and actual has value", null, actual.val);
         }
 
         if (actual == null && expected != null) {
-            throw new AssertionFailedError("Actual is null and expected has value", expected.value, null);
+            throw new AssertionFailedError("Actual is null and expected has value", expected.val, null);
         }
 
         if (actual != null) {
-            assertEquals(expected.value, actual.value);
+            assertEquals(expected.val, actual.val);
             treesAreTheSame(expected.left, actual.left);
             treesAreTheSame(expected.right, actual.right);
         }

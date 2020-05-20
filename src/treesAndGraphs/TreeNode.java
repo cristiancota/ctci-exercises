@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class TreeNode {
-    int value;
-    TreeNode left;
-    TreeNode right;
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
     public TreeNode(int value) {
-        this.value = value;
+        this.val = value;
     }
 
     static TreeNode createTree(int[] array) {
@@ -47,5 +47,14 @@ public class TreeNode {
 
 
         return node;
+    }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "val=" + val +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
     }
 }
