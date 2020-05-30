@@ -14,7 +14,7 @@ public class DeleteNodeBST {
                     return node.left;
                 }
 
-                if(node.left == null){
+                if (node.left == null) {
                     return node.right;
                 }
 
