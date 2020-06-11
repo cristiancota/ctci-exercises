@@ -1,23 +1,19 @@
 package leetCode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class JewelsAndStones {
     public int numJewelsInStones(String J, String S) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int ans = 0;
+        Map<Character, Integer> map = new HashMap<>();
 
         for (int i = 0; i < S.length(); i++) {
             char key = S.charAt(i);
-            map.merge(key, 1, Integer::sum);
-        }
-
-        for (int i = 0; i < J.length(); i++) {
-            if (map.get(J.charAt(i)) != null) {
-                ans += map.get(J.charAt(i));
+            if (J.indexOf(key) >= 0) {
+                map.merge(key, 1, Integer::sum);
             }
         }
 
-        return ans;
+        return map.values().stream().mapToInt(i -> i).sum();
     }
 }
