@@ -250,4 +250,28 @@ class TreesAndGraphs {
     List<int[]> BSTSequence(TreeNode tree) { // TODO start this one
         return null;
     }
+
+    int pathSum(TreeNode root, int sum) {
+        return helperPathSum(root, sum, new ArrayList<>());
+    }
+
+    private int helperPathSum(TreeNode node, int goal, List<Integer> branch) {
+        if (node == null) return 0;
+        branch.add(node.val);
+
+        int sum = 0;
+        int total = 0;
+        for (int i = branch.size() - 1; i >= 0; i--) {
+            sum += branch.get(i);
+            if (sum == goal) {
+                total++;
+            }
+        }
+
+        total += helperPathSum(node.left, goal, branch) + helperPathSum(node.right, goal, branch);
+
+        branch.remove(branch.size() - 1);
+
+        return total;
+    }
 }

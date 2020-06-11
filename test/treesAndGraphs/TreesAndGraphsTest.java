@@ -360,4 +360,35 @@ class TreesAndGraphsTest {
 //
 //        assertTrue(treesAndGraphs.treesAreTheSame(original, inverted));
     }
+
+    @Test
+    void testPathSum() {
+        TreesAndGraphs treesAndGraphs = new TreesAndGraphs();
+        TreeNode tree = new TreeNode(10);
+        tree.left = new TreeNode(5);
+        tree.left.left = new TreeNode(3);
+        tree.left.left.left = new TreeNode(3);
+        tree.left.left.right = new TreeNode(-2);
+        tree.left.right = new TreeNode(2);
+        tree.left.right.right = new TreeNode(1);
+        tree.right = new TreeNode(-3);
+        tree.right.right = new TreeNode(11);
+
+        assertEquals(3,treesAndGraphs.pathSum(tree, 8));// 3
+
+        TreeNode tree2 = new TreeNode(1);
+        tree2.left = new TreeNode(2);
+
+        assertEquals(1, treesAndGraphs.pathSum(tree2, 2));
+
+        TreeNode tree3 = new TreeNode(0);
+        tree3.left = new TreeNode(1);
+        tree3.right = new TreeNode(1);
+
+        assertEquals(4, treesAndGraphs.pathSum(tree3, 1));
+
+        TreeNode tree4 = new TreeNode(1);
+
+        assertEquals(0, treesAndGraphs.pathSum(tree4, 0));
+    }
 }
