@@ -5,7 +5,7 @@ import java.util.List;
 
 class BrowserHistory {
 
-    private List<String> _history = null;
+    private List<String> _history;
     private int _currentIndex = 0;
 
     public BrowserHistory(String homepage) {
