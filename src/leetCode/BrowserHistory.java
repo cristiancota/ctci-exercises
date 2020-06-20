@@ -1,22 +1,26 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 class BrowserHistory {
 
-    private List<String> _history;
+    private Map<Integer, String> _history;
     private int _currentIndex = 0;
 
     public BrowserHistory(String homepage) {
-        _history = new ArrayList<>();
-        _history.add(_currentIndex, homepage);
+        _history = new HashMap<>();
+        _history.put(_currentIndex, homepage);
     }
 
     public void visit(String url) {
         _currentIndex++;
-        _history.subList(_currentIndex, _history.size()).clear();
-        _history.add(_currentIndex, url);
+        _history.put(_currentIndex, url);
+        int i = 1;
+        while (_history.get(_currentIndex + i) != null) {
+            _history.remove(_currentIndex + i);
+            i++;
+        }
     }
 
     public String back(int steps) {
