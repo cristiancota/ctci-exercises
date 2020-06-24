@@ -35,4 +35,35 @@ public class BitManipulation {
 
         return ans.toString();
     }
+
+    int flipBitToWin(int number) {
+        int groups = 0;
+        int max = 0;
+        int zeros = 0;
+        int currentGroup = 0;
+        int current = 0;
+        while (number > 0) {
+
+            if (number % 2 > 0) {
+                if (currentGroup == 0) {
+                    groups++;
+                }
+                current += 1;
+                currentGroup += 1;
+            } else {
+                zeros++;
+                if (zeros > 1) {
+                    current = current - currentGroup - 1;
+                    zeros = 1;
+                } else {
+                    current++;
+                }
+                currentGroup = 0;
+            }
+            max = Math.max(current, max);
+            number >>= 1;
+        }
+
+        return groups == 1 ? max : groups >= 3 ? max : max - 1;
+    }
 }

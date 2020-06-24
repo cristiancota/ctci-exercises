@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BitManipulationTest {
 
-    final BitManipulation bitManipulation = new BitManipulation();
+    BitManipulation bitManipulation = new BitManipulation();
 
     @Test
     void testInsertion() {
@@ -29,5 +29,14 @@ public class BitManipulationTest {
         assertEquals("ERROR", bitManipulation.binaryToString(1));
         assertEquals("ERROR", bitManipulation.binaryToString(0));
         assertEquals("ERROR", bitManipulation.binaryToString(-1));
+    }
+
+    @Test
+    void testFlipToWin() {
+        assertEquals(8, bitManipulation.flipBitToWin(1775));
+        assertEquals(4, bitManipulation.flipBitToWin(973));
+        assertEquals(9, bitManipulation.flipBitToWin(16111));
+        assertEquals(2, bitManipulation.flipBitToWin(5));
+        assertEquals(2, bitManipulation.flipBitToWin(3));
     }
 }
