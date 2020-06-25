@@ -4,7 +4,11 @@ import java.util.*;
 
 public class SortIntegersByOnes {
     public int[] sortByBits(int[] arr) {
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(arr);
+        for (int i = 0; i < 32; i++) {
+            list.add(i, new ArrayList<>());
+        }
         int maxOnes = 0;
         for (int i = 0; i < arr.length; i++) {
             int current = arr[i];
@@ -15,27 +19,19 @@ public class SortIntegersByOnes {
                 }
                 current >>= 1;
             }
-            if (map.get(currentOnes) != null) {
-                List<Integer> integers = map.get(currentOnes);
-                integers.add(arr[i]);
-                map.put(currentOnes, integers);
-            } else {
-                ArrayList<Integer> integers = new ArrayList<>();
-                integers.add(arr[i]);
-                map.put(currentOnes, integers);
-            }
-
+            List<Integer> integers = list.get(currentOnes);
+            integers.add(arr[i]);
             maxOnes = Math.max(maxOnes, currentOnes);
         }
-        return map.entrySet().stream().
-                sorted(Map.Entry.comparingByKey()).
-                map(integerListEntry -> {
-                    Integer[] objects = integerListEntry.getValue().toArray(new Integer[0]);
-                    Arrays.sort(objects);
-                    return Arrays.asList(objects);
-                }).
-                flatMap(Collection::parallelStream).
-                mapToInt(Integer::intValue).
-                toArray();
+        int[] ans = new int[arr.length];
+        int currentIndex = 0;
+        for (int i = 0; i <= maxOnes; i++) {
+            Integer[] integers = list.get(i).toArray(new Integer[0]);
+            for (int i1 = 0; i1 < integers.length; i1++) {
+                ans[currentIndex] = integers[i1];
+                currentIndex++;
+            }
+        }
+        return ans;
     }
 }
