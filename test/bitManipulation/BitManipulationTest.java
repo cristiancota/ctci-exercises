@@ -48,4 +48,30 @@ public class BitManipulationTest {
         assertArrayEquals(new int[]{2147483647, 2147483647}, bitManipulation.nextNumber(2147483647));
         assertArrayEquals(new int[]{2147483645, 2147483646}, bitManipulation.nextNumber(2147483646));
     }
+
+    @Test
+    void testDebugger() {
+        assertTrue(bitManipulation.debugger(1));
+        assertTrue(bitManipulation.debugger(2));
+        assertTrue(bitManipulation.debugger(4));
+        assertTrue(bitManipulation.debugger(8));
+        assertTrue(bitManipulation.debugger(16));
+        assertTrue(bitManipulation.debugger(64));
+        assertTrue(bitManipulation.debugger(256));
+        assertTrue(bitManipulation.debugger(32768));
+        assertTrue(bitManipulation.debugger(1048576));
+        assertFalse(bitManipulation.debugger(1048575));
+        assertFalse(bitManipulation.debugger(5));
+        assertFalse(bitManipulation.debugger(50));
+        assertFalse(bitManipulation.debugger(12345));
+    }
+
+    @Test
+    void testConversion() {
+        assertEquals(2, bitManipulation.conversion(29, 15));
+        assertEquals(3, bitManipulation.conversion(83, 26));
+        assertEquals(8, bitManipulation.conversion(511, 1));
+        assertEquals(3, bitManipulation.conversion(170, 173));
+        assertEquals(11, bitManipulation.conversion(1365, 682));
+    }
 }
