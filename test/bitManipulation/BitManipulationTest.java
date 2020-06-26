@@ -2,7 +2,7 @@ package bitManipulation;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BitManipulationTest {
 
@@ -38,5 +38,14 @@ public class BitManipulationTest {
         assertEquals(9, bitManipulation.flipBitToWin(16111));
         assertEquals(2, bitManipulation.flipBitToWin(5));
         assertEquals(2, bitManipulation.flipBitToWin(3));
+    }
+
+    @Test
+    void testNextNumber() {
+        assertArrayEquals(new int[]{9, 12}, bitManipulation.nextNumber(10));
+        assertArrayEquals(new int[]{10, 20}, bitManipulation.nextNumber(12));
+        assertArrayEquals(new int[]{21, 26}, bitManipulation.nextNumber(22));
+        assertArrayEquals(new int[]{2147483647, 2147483647}, bitManipulation.nextNumber(2147483647));
+        assertArrayEquals(new int[]{2147483645, 2147483646}, bitManipulation.nextNumber(2147483646));
     }
 }

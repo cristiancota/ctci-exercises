@@ -66,4 +66,32 @@ public class BitManipulation {
 
         return groups == 1 ? max : groups >= 3 ? max : max - 1;
     }
+
+    int[] nextNumber(int n) {
+        int[] ans = new int[2];
+        int original = n;
+        boolean searchForMinor = true;
+        if (n % 2 > 0) { // there's no smaller with same 1s than itself.
+            ans[0] = n;
+            searchForMinor = false;
+        }
+        for (int i = 1; i < 31; i++) {
+            n >>= 1;
+            if (searchForMinor) {
+                if (n % 2 != 0) {
+                    ans[0] = (int) (original - Math.pow(2, i) + Math.pow(2, i - 1));
+                    searchForMinor = false;
+                }
+            } else {
+                if (n % 2 == 0) {
+                    ans[1] = (int) (original - Math.pow(2, i - 1) + Math.pow(2, i));
+                    break;
+                }
+            }
+        }
+        if (ans[1] == 0) {
+            ans[1] = original;
+        }
+        return ans;
+    }
 }
