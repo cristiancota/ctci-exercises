@@ -107,4 +107,14 @@ public class BitManipulation {
         }
         return ans;
     }
+
+    int pairwiseSwap(int n) {
+        // 0xA => 1010
+        // 0x5 => 0101
+        return (((n & 0xAAAAAAAA) >>> 1) | ((n & 0x55555555) << 1));
+    }
+
+    void drawLine(byte[] screen, int width, int x1, int x2, int y) {
+        // TODO complete this one
+    }
 }

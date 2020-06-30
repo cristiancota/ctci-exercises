@@ -74,4 +74,13 @@ public class BitManipulationTest {
         assertEquals(3, bitManipulation.conversion(170, 173));
         assertEquals(11, bitManipulation.conversion(1365, 682));
     }
+
+    @Test
+    void testPairwiseSwap() {
+        assertEquals(5, bitManipulation.pairwiseSwap(10));
+        assertEquals(170, bitManipulation.pairwiseSwap(85));
+        assertEquals(341, bitManipulation.pairwiseSwap(682));
+        assertEquals(1989, bitManipulation.pairwiseSwap(3018));
+        assertEquals(238970, bitManipulation.pairwiseSwap(219829));
+    }
 }
