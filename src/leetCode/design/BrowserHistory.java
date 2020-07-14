@@ -1,9 +1,9 @@
-package leetCode;
+package leetCode.design;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class BrowserHistory {
+public class BrowserHistory {
 
     private Map<Integer, String> _history;
     private int _currentIndex = 0;
