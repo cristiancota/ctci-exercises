@@ -145,12 +145,12 @@ class ArraysAndStringsTest {
     }
 
     @Test
-    void testStringRotation(){
+    void testStringRotation() {
         ArraysAndStrings arraysAndStrings = new ArraysAndStrings();
         assertTrue(arraysAndStrings.stringRotation("abcde", "cdeab"));
         assertTrue(arraysAndStrings.stringRotation("aaaabcd", "aabcdaa"));
-        assertTrue(arraysAndStrings.stringRotation("cristian","ristianc"));
-        assertTrue(arraysAndStrings.stringRotation("bbbacddceeb","ceebbbbacdd"));
-        assertFalse(arraysAndStrings.stringRotation("abcde","abced"));
+        assertTrue(arraysAndStrings.stringRotation("cristian", "ristianc"));
+        assertTrue(arraysAndStrings.stringRotation("bbbacddceeb", "ceebbbbacdd"));
+        assertFalse(arraysAndStrings.stringRotation("abcde", "abced"));
     }
 }

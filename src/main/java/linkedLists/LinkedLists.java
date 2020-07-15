@@ -6,27 +6,44 @@ import java.util.List;
 
 public class LinkedLists {
     ListNode removeDups(ListNode head) {
-        if (head == null) return null;
-
-        ArrayList<Integer> integers = new ArrayList<>();
-        ListNode finalList = null;
-        ListNode current = new ListNode(head.val);
-
+//        if (head == null) return null;
+//
+//        ArrayList<Integer> integers = new ArrayList<>();
+//        ListNode finalList = null;
+//        ListNode current = new ListNode(head.val);
+//
+//        while (head != null) {
+//            if (!integers.contains(head.val)) {
+//                integers.add(head.val);
+//                if (finalList == null) {
+//                    finalList = current;
+//                } else {
+//                    current.next = head;
+//                    current = head;
+//                }
+//            }
+//
+//            head = head.next;
+//        }
+//
+//        return finalList;
+        ListNode ans = head;
         while (head != null) {
-            if (!integers.contains(head.val)) {
-                integers.add(head.val);
-                if (finalList == null) {
-                    finalList = current;
-                } else {
-                    current.next = head;
-                    current = head;
-                }
-            }
-
+            removeDupsHelper(head.val, head.next, head); // enter a step forward
             head = head.next;
         }
+        return ans;
+    }
 
-        return finalList;
+    private void removeDupsHelper(int target, ListNode current, ListNode prev) {
+        while (current != null) {
+            if (current.val == target) {
+                prev.next = current.next;
+            } else {
+                prev = current;
+            }
+            current = current.next;
+        }
     }
 
     ListNode kthToLast(ListNode head, int kth) {
@@ -40,45 +57,45 @@ public class LinkedLists {
     }
 
     ListNode partition(ListNode head, int x) {
-        List<Integer> smallers = new ArrayList<>();
-        List<Integer> greaters = new ArrayList<>();
+        List<Integer> little = new ArrayList<>();
+        List<Integer> big = new ArrayList<>();
 
         while (head != null) {
             if (head.val < x) {
-                smallers.add(head.val);
+                little.add(head.val);
             } else {
-                greaters.add(head.val);
+                big.add(head.val);
             }
 
             head = head.next;
         }
 
-        ListNode toReturn = null;
-        ListNode newHead = null;
+        ListNode ans = null;
+        ListNode currentHead = null;
 
-        for (Integer current : smallers) {
-            if (toReturn == null) {
-                toReturn = new ListNode(current);
-                newHead = toReturn;
+        for (Integer current : little) {
+            if (ans == null) {
+                ans = new ListNode(current);
+                currentHead = ans;
             } else {
                 ListNode newNode = new ListNode(current);
-                newHead.next = newNode;
-                newHead = newNode;
+                currentHead.next = newNode;
+                currentHead = newNode;
             }
         }
 
-        for (Integer current : greaters) {
-            if (toReturn == null) {
-                toReturn = new ListNode(current);
-                newHead = toReturn;
+        for (Integer current : big) {
+            if (ans == null) {
+                ans = new ListNode(current);
+                currentHead = ans;
             } else {
                 ListNode newNode = new ListNode(current);
-                newHead.next = newNode;
-                newHead = newNode;
+                currentHead.next = newNode;
+                currentHead = newNode;
             }
         }
 
-        return toReturn;
+        return ans;
     }
 
     void deleteMiddleNode(ListNode head) {

@@ -7,17 +7,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListsTest {
 
+    LinkedLists linkedLists = new LinkedLists();
+
     @Test
     void testRemoveDuplicated() {
-        LinkedLists linkedLists = new LinkedLists();
         ListNode expected = createLinkedList(1, 2, 3, 4, 5, 6);
         ListNode actual = linkedLists.removeDups(createLinkedList(1, 2, 3, 4, 2, 5, 6));
+        assertTrue(linkedListsAreSame(expected, actual));
+
+        expected = createLinkedList(1, 2, 3);
+        actual = linkedLists.removeDups(createLinkedList(1, 2, 3, 3, 2, 1, 3));
         assertTrue(linkedListsAreSame(expected, actual));
     }
 
     @Test
     void testKthToLast() {
-        LinkedLists linkedLists = new LinkedLists();
         ListNode expected = createLinkedList(4, 5, 6);
         ListNode actual = linkedLists.kthToLast(createLinkedList(1, 2, 3, 4, 5, 6), 4);
 
@@ -33,7 +37,6 @@ public class LinkedListsTest {
 
     @Test
     void testPartition() {
-        LinkedLists linkedLists = new LinkedLists();
         ListNode expected = createLinkedList(1, 2, 2, 4, 3, 5);
         ListNode actual = linkedLists.partition(createLinkedList(1, 4, 3, 2, 5, 2), 3);
         assertTrue(linkedListsAreSame(expected, actual));
@@ -44,7 +47,6 @@ public class LinkedListsTest {
 
     @Test
     void testDeleteMiddleNode() {
-        LinkedLists linkedLists = new LinkedLists();
         ListNode expected = createLinkedList(1, 3, 4, 5);
         ListNode actual = createLinkedList(1, 2, 3, 4, 5);
 
@@ -69,7 +71,6 @@ public class LinkedListsTest {
 
     @Test
     void testSumLists() {
-        LinkedLists linkedLists = new LinkedLists();
         ListNode expected = createLinkedList(2, 1, 9);
         ListNode first = createLinkedList(7, 1, 6);
         ListNode second = createLinkedList(5, 9, 2);
@@ -87,7 +88,6 @@ public class LinkedListsTest {
 
     @Test
     void testIsPalindrome() {
-        LinkedLists linkedLists = new LinkedLists();
         assertTrue(linkedLists.isPalindrome(createLinkedList(1, 2, 3, 2, 1)));
         assertFalse(linkedLists.isPalindrome(createLinkedList(1, 2, 3)));
         assertFalse(linkedLists.isPalindrome(createLinkedList(1, 3)));
@@ -97,7 +97,6 @@ public class LinkedListsTest {
 
     @Test
     void testIntersection() {
-        LinkedLists linkedLists = new LinkedLists();
 
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(2);
@@ -119,9 +118,9 @@ public class LinkedListsTest {
         assertEquals(c, linkedLists.intersection(a, d));
         assertNull(linkedLists.intersection(createLinkedList(1, 2, 3), createLinkedList(1, 2, 3)));
     }
+
     @Test
     void testLoopDetection() {
-        LinkedLists linkedLists = new LinkedLists();
 
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(2);
@@ -135,7 +134,7 @@ public class LinkedListsTest {
         e.next = c;
 
         assertEquals(c, linkedLists.loopDetection(a));
-        assertNull(linkedLists.loopDetection(createLinkedList(1,2,3,4,5,6,7)));
+        assertNull(linkedLists.loopDetection(createLinkedList(1, 2, 3, 4, 5, 6, 7)));
     }
 
     private boolean linkedListsAreSame(ListNode expected, ListNode actual) {

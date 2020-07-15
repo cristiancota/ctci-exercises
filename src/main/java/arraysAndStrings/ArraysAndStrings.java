@@ -6,7 +6,7 @@ import java.util.HashSet;
 class ArraysAndStrings {
 
     boolean isUnique(String s) {
-        HashSet<String> hashSet = new HashSet<String>();
+        HashSet<String> hashSet = new HashSet<>();
 
         for (String str : s.split(""))
             if (!hashSet.add(str)) return false;

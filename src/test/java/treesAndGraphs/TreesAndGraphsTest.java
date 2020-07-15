@@ -374,7 +374,7 @@ class TreesAndGraphsTest {
         tree.right = new TreeNode(-3);
         tree.right.right = new TreeNode(11);
 
-        assertEquals(3,treesAndGraphs.pathSum(tree, 8));// 3
+        assertEquals(3, treesAndGraphs.pathSum(tree, 8));// 3
 
         TreeNode tree2 = new TreeNode(1);
         tree2.left = new TreeNode(2);
