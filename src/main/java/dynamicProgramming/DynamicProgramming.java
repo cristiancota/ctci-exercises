@@ -1,6 +1,6 @@
 package dynamicProgramming;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class DynamicProgramming {
 
@@ -58,10 +58,10 @@ public class DynamicProgramming {
     int tripleStep(int n) {
         int[] memo = new int[n + 1];
         Arrays.fill(memo, -1);
-        return tripleStepMemo(n, memo);
+        return tripleStepHelper(n, memo);
     }
 
-    int tripleStepMemo(int n, int[] memo) {
+    int tripleStepHelper(int n, int[] memo) {
         if (n < 0) {
             return 0;
         } else if (n == 0) {
@@ -69,8 +69,85 @@ public class DynamicProgramming {
         } else if (memo[n] > -1) {
             return memo[n];
         } else {
-            memo[n] = tripleStepMemo(n - 1, memo) + tripleStepMemo(n - 2, memo) + tripleStepMemo(n - 3, memo);
+            memo[n] = tripleStepHelper(n - 1, memo) + tripleStepHelper(n - 2, memo) + tripleStepHelper(n - 3, memo);
             return memo[n];
+        }
+    }
+
+    List<Coordinate> robotInAGrid(int[][] matrix) {
+        int[][] memo = new int[matrix.length][matrix[0].length];
+        for (int[] current : memo) {
+            Arrays.fill(current, -1);
+        }
+
+        List<Coordinate> result = robotInAGridHelper(0, 0, matrix, memo, new ArrayList<>());
+        if (result == null) {
+            return new ArrayList<>();
+        } else {
+            Collections.reverse(result);
+        }
+
+        return result;
+    }
+
+    private List<Coordinate> robotInAGridHelper(int row, int column, int[][] matrix, int[][] memo, ArrayList<Coordinate> result) {
+        if (row < 0 || row >= matrix.length) { // if row index s out of limit
+            return null;
+        }
+
+        if (column < 0 || column >= matrix[0].length) { // if column index is out of limit
+            return null;
+        }
+
+        if (matrix[row][column] == 0 || memo[row][column] == 0) { // if matrix has "off limits" was visited already
+            return null;
+        }
+
+        if (row == matrix.length - 1 && column == matrix[0].length - 1) { // arrives to the end
+            result.add(new Coordinate(row, column));
+            return result;
+        }
+
+        memo[row][column] = 1; // mark as visited and can be part of the path
+
+        if ((robotInAGridHelper(row, column + 1, matrix, memo, result) != null) || (robotInAGridHelper(row + 1, column, matrix, memo, result) != null)) {
+            result.add(new Coordinate(row, column));
+            return result;
+        }
+
+        memo[row][column] = 0; // means visited and no eligible for path
+        return null;
+    }
+
+    protected static class Coordinate {
+        private int _row;
+        private int _column;
+
+        Coordinate(int row, int column) {
+            _row = row;
+            _column = column;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Coordinate that = (Coordinate) o;
+            return _row == that._row &&
+                    _column == that._column;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(_row, _column);
+        }
+
+        @Override
+        public String toString() {
+            return "Coordinate{" +
+                    "_row=" + _row +
+                    ", _column=" + _column +
+                    '}';
         }
     }
 }

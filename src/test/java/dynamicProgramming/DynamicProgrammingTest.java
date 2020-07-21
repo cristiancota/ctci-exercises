@@ -2,7 +2,10 @@ package dynamicProgramming;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicProgrammingTest {
 
@@ -41,5 +44,75 @@ public class DynamicProgrammingTest {
         assertEquals(4, dynamicProgramming.tripleStep(3));
         assertEquals(7, dynamicProgramming.tripleStep(4));
         assertEquals(13, dynamicProgramming.tripleStep(5));
+    }
+
+    @Test
+    void testRobotInGrid() {
+        // 1 1 1
+        // 1 1 0
+        // 1 1 1
+        List<DynamicProgramming.Coordinate> expected = new ArrayList<>();
+        expected.add(new DynamicProgramming.Coordinate(0, 0));
+        expected.add(new DynamicProgramming.Coordinate(0, 1));
+        expected.add(new DynamicProgramming.Coordinate(1, 1));
+        expected.add(new DynamicProgramming.Coordinate(2, 1));
+        expected.add(new DynamicProgramming.Coordinate(2, 2));
+        assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
+                {1, 1, 1},
+                {1, 1, 0},
+                {1, 1, 1}
+        }).toArray());
+
+        // 1 0 1
+        // 1 0 1
+        // 1 1 1
+        expected = new ArrayList<>();
+        expected.add(new DynamicProgramming.Coordinate(0, 0));
+        expected.add(new DynamicProgramming.Coordinate(1, 0));
+        expected.add(new DynamicProgramming.Coordinate(2, 0));
+        expected.add(new DynamicProgramming.Coordinate(2, 1));
+        expected.add(new DynamicProgramming.Coordinate(2, 2));
+        assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
+                {1, 0, 1},
+                {1, 0, 1},
+                {1, 1, 1}
+        }).toArray());
+
+        // 1 0 1
+        // 1 1 0
+        // 1 1 0
+        // 1 0 0
+        // 1 1 1
+        expected = new ArrayList<>();
+        expected.add(new DynamicProgramming.Coordinate(0, 0));
+        expected.add(new DynamicProgramming.Coordinate(1, 0));
+        expected.add(new DynamicProgramming.Coordinate(2, 0));
+        expected.add(new DynamicProgramming.Coordinate(3, 0));
+        expected.add(new DynamicProgramming.Coordinate(4, 0));
+        expected.add(new DynamicProgramming.Coordinate(4, 1));
+        expected.add(new DynamicProgramming.Coordinate(4, 2));
+        assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
+                {1, 0, 1},
+                {1, 1, 0},
+                {1, 1, 0},
+                {1, 0, 0},
+                {1, 1, 1}
+        }).toArray());
+
+        // 1 0 1
+        // 1 1 0
+        assertTrue(dynamicProgramming.robotInAGrid(new int[][]{
+                {1, 0, 1},
+                {1, 1, 0}
+        }).isEmpty());
+
+        // 1 0 1
+        // 1 1 0
+        // 1 0 1
+        assertTrue(dynamicProgramming.robotInAGrid(new int[][]{
+                {1, 0, 1},
+                {1, 1, 0},
+                {1, 0, 1}
+        }).isEmpty());
     }
 }
