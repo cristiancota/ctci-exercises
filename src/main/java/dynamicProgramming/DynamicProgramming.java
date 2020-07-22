@@ -150,4 +150,37 @@ public class DynamicProgramming {
                     '}';
         }
     }
+
+    int magicIndex(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == i) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    int magicIndexBinary(int[] nums) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        return magicIndexHelper(nums, nums.length / 2);
+    }
+
+    private int magicIndexHelper(int[] nums, int mid) {
+        final int current = nums[mid];
+
+        if (mid == 0 && mid != current || mid == nums.length - 1 && mid != current) {
+            return -1;
+        }
+
+        if (current > mid) {
+            return magicIndexHelper(nums, mid / 2);
+        } else if (current < mid) {
+            return magicIndexHelper(nums, (nums.length + mid) / 2);
+        } else {
+            return mid;
+        }
+    }
 }

@@ -115,4 +115,21 @@ public class DynamicProgrammingTest {
                 {1, 0, 1}
         }).isEmpty());
     }
+
+    @Test
+    void testMagicNumber() {
+        assertEquals(0, dynamicProgramming.magicIndex(new int[]{0, 8, 40, 43, 50}));
+        assertEquals(3, dynamicProgramming.magicIndex(new int[]{-5, -2, 1, 3, 6, 12, 5000}));
+        assertEquals(5, dynamicProgramming.magicIndex(new int[]{-8, -7, -4, 0, 1, 5}));
+        assertEquals(-1, dynamicProgramming.magicIndex(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+        assertEquals(-1, dynamicProgramming.magicIndex(new int[]{-9, -8, -7, -6, -5, -4, -3, -2, -1}));
+        assertEquals(-1, dynamicProgramming.magicIndex(new int[]{}));
+
+        assertEquals(0, dynamicProgramming.magicIndexBinary(new int[]{0, 8, 40, 43, 50}));
+        assertEquals(3, dynamicProgramming.magicIndexBinary(new int[]{-5, -2, 1, 3, 6, 12, 5000}));
+        assertEquals(5, dynamicProgramming.magicIndexBinary(new int[]{-8, -7, -4, 0, 1, 5}));
+        assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+        assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{-9, -8, -7, -6, -5, -4, -3, -2, -1}));
+        assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{}));
+    }
 }
