@@ -3,6 +3,7 @@ package dynamicProgramming;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -131,5 +132,28 @@ public class DynamicProgrammingTest {
         assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
         assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{-9, -8, -7, -6, -5, -4, -3, -2, -1}));
         assertEquals(-1, dynamicProgramming.magicIndexBinary(new int[]{}));
+    }
+
+    @Test
+    void testPowerSet() {
+        List<List<Integer>> expected = new ArrayList<>();
+        expected.add(new ArrayList<>());
+        expected.add(Arrays.asList(1));
+        expected.add(Arrays.asList(2));
+        expected.add(Arrays.asList(1, 2));
+        expected.add(Arrays.asList(3));
+        expected.add(Arrays.asList(1, 3));
+        expected.add(Arrays.asList(2, 3));
+        expected.add(Arrays.asList(1, 2, 3));
+
+        assertEquals(expected, dynamicProgramming.powerSet(new int[]{1, 2, 3}));
+
+        expected = new ArrayList<>();
+        expected.add(new ArrayList<>());
+        expected.add(Arrays.asList(1));
+        expected.add(Arrays.asList(2));
+        expected.add(Arrays.asList(1, 2));
+
+        assertEquals(expected, dynamicProgramming.powerSet(new int[]{1, 2}));
     }
 }

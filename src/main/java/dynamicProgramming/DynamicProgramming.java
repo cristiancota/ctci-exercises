@@ -183,4 +183,18 @@ public class DynamicProgramming {
             return mid;
         }
     }
+
+    List<List<Integer>> powerSet(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(new ArrayList<>());
+        for (int num : nums) {
+            int size = ans.size();
+            for (int j = 0; j < size; j++) {
+                List<Integer> next = new ArrayList<>(ans.get(j));
+                next.add(num);
+                ans.add(next);
+            }
+        }
+        return ans;
+    }
 }
