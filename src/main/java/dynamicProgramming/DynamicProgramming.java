@@ -197,4 +197,15 @@ public class DynamicProgramming {
         }
         return ans;
     }
+
+    int recursiveMultiply(int a, int b) {
+        return recursiveMultiplyHelper(a, b, 0);
+    }
+
+    private int recursiveMultiplyHelper(int a, int b, int result) {
+        if (b <= 0) {
+            return result;
+        }
+        return recursiveMultiplyHelper(a, b - 1, result + a);
+    }
 }

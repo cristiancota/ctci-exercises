@@ -156,4 +156,13 @@ public class DynamicProgrammingTest {
 
         assertEquals(expected, dynamicProgramming.powerSet(new int[]{1, 2}));
     }
+
+    @Test
+    void testRecursiveMultiply() {
+        assertEquals(2, dynamicProgramming.recursiveMultiply(1, 2));
+        assertEquals(49, dynamicProgramming.recursiveMultiply(7, 7));
+        assertEquals(1472, dynamicProgramming.recursiveMultiply(23, 64));
+        assertEquals(0, dynamicProgramming.recursiveMultiply(7, 0));
+        assertEquals(0, dynamicProgramming.recursiveMultiply(0, 7));
+    }
 }
