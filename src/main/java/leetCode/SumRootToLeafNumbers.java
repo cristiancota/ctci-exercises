@@ -2,12 +2,6 @@ package leetCode;
 
 import treesAndGraphs.TreeNode;
 
-//      2
-//     / \
-//    3   4
-//   / \
-//  2   1
-
 public class SumRootToLeafNumbers {
     int sumNumbers(TreeNode tree) {
         if (tree == null) return 0;
