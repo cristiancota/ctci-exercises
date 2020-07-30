@@ -4,7 +4,6 @@ import treesAndGraphs.TreeNode;
 
 public class SumRootToLeafNumbers {
     int sumNumbers(TreeNode tree) {
-        if (tree == null) return 0;
         return sumNumberHelper(tree, 0);
     }
 
