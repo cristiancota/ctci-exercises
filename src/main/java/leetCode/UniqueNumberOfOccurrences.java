@@ -13,11 +13,9 @@ public class UniqueNumberOfOccurrences {
             counts.put(number, ++prevValue);
         }
         Set<Integer> e = new HashSet<>();
-        for (Integer value : counts.values()) {
-            if (!e.add(value)) {
+        for (Integer value : counts.values())
+            if (!e.add(value))
                 return false;
-            }
-        }
         return true;
     }
 }
