@@ -5,45 +5,27 @@ import java.util.Queue;
 
 public class PopulatingNextRightPointers {
     public Node connect(Node root) {
-        return connectHelper(root);
-    }
-
-    private Node connectHelper(Node root) {
-        Queue<Node> queue = new LinkedList<>();
         if (root == null) {
             return null;
         }
-
+        Queue<Node> queue = new LinkedList<>();
         root.next = null;
-        if (root.left != null) {
-            queue.add(root.left);
-        }
-
-        if (root.right != null) {
-            queue.add(root.right);
-        }
-
+        queue.add(root);
         queue.add(null);
-
         while (!queue.isEmpty() && queue.peek() != null) {
             Node current = queue.remove();
             current.next = queue.peek();
-
             if (current.left != null) {
                 queue.add(current.left);
             }
-
             if (current.right != null) {
                 queue.add(current.right);
             }
-
             if (current.next == null) {
                 queue.add(null);
                 queue.remove();
             }
         }
-
-
         return root;
     }
 }
