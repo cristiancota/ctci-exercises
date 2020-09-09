@@ -8,18 +8,15 @@ public class SumRootToLeafNumbers {
     }
 
     private int sumNumberHelper(TreeNode node, int val) {
-        if (node != null) {
-            if (isLeaf(node)) {
-                return (val * 10) + node.val;
-            } else {
-                val *= 10;
-                return sumNumberHelper(node.left, val + node.val) + sumNumberHelper(node.right, val + node.val);
-            }
+        if (node == null) {
+            return 0;
         }
-        return 0;
-    }
 
-    private boolean isLeaf(TreeNode node) {
-        return node.left == null && node.right == null;
+        if (node.left == null && node.right == null) { // is leaf
+            return (val * 10) + node.val;
+        } else {
+            val *= 10;
+            return sumNumberHelper(node.left, val + node.val) + sumNumberHelper(node.right, val + node.val);
+        }
     }
 }
