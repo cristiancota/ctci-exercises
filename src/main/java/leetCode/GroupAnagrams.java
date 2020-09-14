@@ -2,13 +2,12 @@ package leetCode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> result = new CopyOnWriteArrayList<List<String>>();
+        List<List<String>> result = new CopyOnWriteArrayList<>();
         for (String currentString : strs) {
             if (result.isEmpty()) {
                 List<String> strings = new ArrayList<>();
