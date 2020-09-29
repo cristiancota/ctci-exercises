@@ -57,21 +57,22 @@ public class DynamicProgramming {
 
     int tripleStep(int n) {
         int[] memo = new int[n + 1];
-        Arrays.fill(memo, -1);
         return tripleStepHelper(n, memo);
     }
 
     int tripleStepHelper(int n, int[] memo) {
-        if (n < 0) {
+        if (n < 0) // base cases
             return 0;
-        } else if (n == 0) {
+
+        if (n <= 1)
             return 1;
-        } else if (memo[n] > -1) {
-            return memo[n];
-        } else {
-            memo[n] = tripleStepHelper(n - 1, memo) + tripleStepHelper(n - 2, memo) + tripleStepHelper(n - 3, memo);
+
+        if (memo[n] != 0) { // exists in memo
             return memo[n];
         }
+
+        memo[n] = tripleStepHelper(n - 3, memo) + tripleStepHelper(n - 2, memo) + tripleStepHelper(n - 1, memo);
+        return memo[n];
     }
 
     List<Coordinate> robotInAGrid(int[][] matrix) {
@@ -117,38 +118,6 @@ public class DynamicProgramming {
 
         memo[row][column] = 0; // means visited and no eligible for path
         return null;
-    }
-
-    protected static class Coordinate {
-        private int _row;
-        private int _column;
-
-        Coordinate(int row, int column) {
-            _row = row;
-            _column = column;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Coordinate that = (Coordinate) o;
-            return _row == that._row &&
-                    _column == that._column;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(_row, _column);
-        }
-
-        @Override
-        public String toString() {
-            return "Coordinate{" +
-                    "_row=" + _row +
-                    ", _column=" + _column +
-                    '}';
-        }
     }
 
     int magicIndex(int[] nums) {

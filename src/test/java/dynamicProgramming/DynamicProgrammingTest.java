@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,12 +40,13 @@ public class DynamicProgrammingTest {
 
     @Test
     void testTripleStep() {
-        assertEquals(1, dynamicProgramming.tripleStep(0));
+        assertEquals(1, dynamicProgramming.tripleStep(0)); // there's no right answer for this, due my approach I need this to be 1
         assertEquals(1, dynamicProgramming.tripleStep(1));
         assertEquals(2, dynamicProgramming.tripleStep(2));
         assertEquals(4, dynamicProgramming.tripleStep(3));
         assertEquals(7, dynamicProgramming.tripleStep(4));
         assertEquals(13, dynamicProgramming.tripleStep(5));
+        assertEquals(24, dynamicProgramming.tripleStep(6));
     }
 
     @Test
@@ -52,12 +54,12 @@ public class DynamicProgrammingTest {
         // 1 1 1
         // 1 1 0
         // 1 1 1
-        List<DynamicProgramming.Coordinate> expected = new ArrayList<>();
-        expected.add(new DynamicProgramming.Coordinate(0, 0));
-        expected.add(new DynamicProgramming.Coordinate(0, 1));
-        expected.add(new DynamicProgramming.Coordinate(1, 1));
-        expected.add(new DynamicProgramming.Coordinate(2, 1));
-        expected.add(new DynamicProgramming.Coordinate(2, 2));
+        List<Coordinate> expected = new ArrayList<>();
+        expected.add(new Coordinate(0, 0));
+        expected.add(new Coordinate(0, 1));
+        expected.add(new Coordinate(1, 1));
+        expected.add(new Coordinate(2, 1));
+        expected.add(new Coordinate(2, 2));
         assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
                 {1, 1, 1},
                 {1, 1, 0},
@@ -68,11 +70,11 @@ public class DynamicProgrammingTest {
         // 1 0 1
         // 1 1 1
         expected = new ArrayList<>();
-        expected.add(new DynamicProgramming.Coordinate(0, 0));
-        expected.add(new DynamicProgramming.Coordinate(1, 0));
-        expected.add(new DynamicProgramming.Coordinate(2, 0));
-        expected.add(new DynamicProgramming.Coordinate(2, 1));
-        expected.add(new DynamicProgramming.Coordinate(2, 2));
+        expected.add(new Coordinate(0, 0));
+        expected.add(new Coordinate(1, 0));
+        expected.add(new Coordinate(2, 0));
+        expected.add(new Coordinate(2, 1));
+        expected.add(new Coordinate(2, 2));
         assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
                 {1, 0, 1},
                 {1, 0, 1},
@@ -85,13 +87,13 @@ public class DynamicProgrammingTest {
         // 1 0 0
         // 1 1 1
         expected = new ArrayList<>();
-        expected.add(new DynamicProgramming.Coordinate(0, 0));
-        expected.add(new DynamicProgramming.Coordinate(1, 0));
-        expected.add(new DynamicProgramming.Coordinate(2, 0));
-        expected.add(new DynamicProgramming.Coordinate(3, 0));
-        expected.add(new DynamicProgramming.Coordinate(4, 0));
-        expected.add(new DynamicProgramming.Coordinate(4, 1));
-        expected.add(new DynamicProgramming.Coordinate(4, 2));
+        expected.add(new Coordinate(0, 0));
+        expected.add(new Coordinate(1, 0));
+        expected.add(new Coordinate(2, 0));
+        expected.add(new Coordinate(3, 0));
+        expected.add(new Coordinate(4, 0));
+        expected.add(new Coordinate(4, 1));
+        expected.add(new Coordinate(4, 2));
         assertArrayEquals(expected.toArray(), dynamicProgramming.robotInAGrid(new int[][]{
                 {1, 0, 1},
                 {1, 1, 0},
@@ -138,10 +140,10 @@ public class DynamicProgrammingTest {
     void testPowerSet() {
         List<List<Integer>> expected = new ArrayList<>();
         expected.add(new ArrayList<>());
-        expected.add(Arrays.asList(1));
-        expected.add(Arrays.asList(2));
+        expected.add(Collections.singletonList(1));
+        expected.add(Collections.singletonList(2));
         expected.add(Arrays.asList(1, 2));
-        expected.add(Arrays.asList(3));
+        expected.add(Collections.singletonList(3));
         expected.add(Arrays.asList(1, 3));
         expected.add(Arrays.asList(2, 3));
         expected.add(Arrays.asList(1, 2, 3));
@@ -150,8 +152,8 @@ public class DynamicProgrammingTest {
 
         expected = new ArrayList<>();
         expected.add(new ArrayList<>());
-        expected.add(Arrays.asList(1));
-        expected.add(Arrays.asList(2));
+        expected.add(Collections.singletonList(1));
+        expected.add(Collections.singletonList(2));
         expected.add(Arrays.asList(1, 2));
 
         assertEquals(expected, dynamicProgramming.powerSet(new int[]{1, 2}));
