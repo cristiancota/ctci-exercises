@@ -1,41 +1,26 @@
 package leetCode.challenge.october;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RemoveCoveredIntervals {
     public int removeCoveredIntervals(int[][] intervals) {
-        HashMap<Integer, Integer> map = new HashMap<>(); // <index,range>
-        for (int i = 0; i < intervals.length; i++) {
-            int[] interval = intervals[i];
-            int a = interval[0];
-            int b = interval[1];
-            map.put(i, b - a);
-        }
-
-        List<Integer> sorted = map.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        int counter = 0;
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[1] - a[0]));
         Set<Integer> excluded = new HashSet<>();
-
-        for (int i = 0; i < sorted.size(); i++) {
-            final int[] biggerInterval = intervals[sorted.get(i)];
-            for (int j = i + 1; j < sorted.size(); j++) {
-                final int[] currentInterval = intervals[sorted.get(j)];
-                final int currL = currentInterval[0];
-                final int bigL = biggerInterval[0];
-                final int currR = currentInterval[1];
-                final int bigR = biggerInterval[1];
-                if ((currL >= bigL && currR < bigR || currL > bigL && currR <= bigR) && !excluded.contains(j)) {
-                    excluded.add(j);
-                    counter++;
+        for (int i = 0; i < intervals.length; i++) {
+            final int[] smallerInterval = intervals[i];
+            for (int j = i + 1; j < intervals.length; j++) {
+                if (!excluded.contains(i)) {
+                    final int[] currentInterval = intervals[j];
+                    if (currentInterval[0] <= smallerInterval[0] && currentInterval[1] >= smallerInterval[1]) {
+                        excluded.add(i);
+                    }
                 }
             }
         }
 
-        return intervals.length - counter;
+        return intervals.length - excluded.size();
     }
 }
