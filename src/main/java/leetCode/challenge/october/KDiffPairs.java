@@ -1,27 +1,48 @@
 package leetCode.challenge.october;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-//K-diff Pairs in an Array
 public class KDiffPairs {
     public int findPairs(int[] nums, int k) {
-        Set<List<Integer>> set = new HashSet<>();
+        HashMap<String, Integer> map = new HashMap<>();
+        for (int value : nums) {
+            String index = String.valueOf(value);
+            map.putIfAbsent(index, 0);
+            Integer integer = map.get(index);
+            integer++;
+            map.put(index, integer);
+        }
+
         Arrays.sort(nums);
 
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                final int a = nums[i];
-                final int b = nums[j];
-                final int diff = Math.abs(a - b);
-                if (i != j && a <= b && (diff == k)) {
-                    set.add(Arrays.asList(a,b));
+        Set<String> existing = new HashSet<>();
+        int ans = 0;
+
+        for (int num : nums) {
+            String numString = String.valueOf(num);
+            String upper = String.valueOf(num + k);
+
+            if ((existing.contains(upper) && existing.contains(numString))) {
+                continue;
+            }
+
+            if (k != 0) {
+                if (map.get(upper) != null) {
+                    existing.add(numString);
+                    existing.add(upper);
+                    ans++;
+                }
+            } else {
+                if (map.get(upper) > 1 && !existing.contains(upper)) {
+                    existing.add(upper);
+                    ans++;
                 }
             }
         }
 
-        return set.size();
+        return ans;
     }
 }
