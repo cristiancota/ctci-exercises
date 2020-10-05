@@ -9,18 +9,19 @@ public class RemoveCoveredIntervals {
     public int removeCoveredIntervals(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[1] - a[0]));
         Set<Integer> excluded = new HashSet<>();
+        int ans = intervals.length;
         for (int i = 0; i < intervals.length; i++) {
-            final int[] smallerInterval = intervals[i];
-            for (int j = i + 1; j < intervals.length; j++) {
+            for (int j = i; j < intervals.length; j++) {
                 if (!excluded.contains(i)) {
-                    final int[] currentInterval = intervals[j];
-                    if (currentInterval[0] <= smallerInterval[0] && currentInterval[1] >= smallerInterval[1]) {
+                    if (intervals[j][0] <= intervals[i][0] && intervals[j][1] >= intervals[i][1]) {
                         excluded.add(i);
+                        ans--;
+                        break;
                     }
                 }
             }
         }
 
-        return intervals.length - excluded.size();
+        return ans;
     }
 }
