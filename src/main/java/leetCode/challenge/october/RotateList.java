@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.challenge.october;
 
 import linkedLists.ListNode;
 
@@ -26,7 +26,7 @@ public class RotateList {
         return ans;
     }
 
-    public ListNode rotate(ListNode head) { // TODO with the length I assume I can do the rotation with a single movement
+    public ListNode rotate(ListNode head) {
         ListNode originalHead = head;
         while (head != null) {
             ListNode next = head.next;
