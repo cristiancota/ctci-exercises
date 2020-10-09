@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.challenge.october;
 
 public class BinarySearch {
     public int search(int[] nums, int target) {
