@@ -15,7 +15,7 @@ public class BinarySearchTreeSerializer {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        StringBuilder builder = new StringBuilder("[");
+        StringBuilder builder = new StringBuilder();
 
         while (!queue.isEmpty()) {
             TreeNode current = queue.remove();
@@ -36,7 +36,7 @@ public class BinarySearchTreeSerializer {
             queue.add(current.right);
         }
 
-        return builder.substring(0, builder.length() - 1) + "]";
+        return builder.substring(0, builder.length() - 1);
     }
 
     // Decodes your encoded data to tree.
@@ -45,38 +45,38 @@ public class BinarySearchTreeSerializer {
             return null;
         }
 
-        data = data.substring(1, data.length() - 1);
         String[] split = data.split(",");
 
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> nodes = new LinkedList<>();
 
         for (String s : split) {
             if (s.equals("null")) {
-                queue.add(null);
+                nodes.add(null);
             } else {
-                queue.add(new TreeNode(Integer.parseInt(s)));
+                nodes.add(new TreeNode(Integer.parseInt(s)));
             }
         }
 
-        if (queue.isEmpty()) {
+        if (nodes.isEmpty()) {
             return null;
         }
 
-        TreeNode result = queue.remove();
+        TreeNode result = nodes.remove();
+
         Queue<TreeNode> parents = new LinkedList<>();
         parents.add(result);
 
-        while (!queue.isEmpty()) {
+        while (!nodes.isEmpty()) {
             TreeNode currentParent = parents.remove();
             if (currentParent == null) {
                 continue;
             }
 
-            TreeNode leftNode = queue.remove();
+            TreeNode leftNode = nodes.remove();
             currentParent.left = leftNode;
             parents.add(leftNode);
 
-            TreeNode rightNode = queue.remove();
+            TreeNode rightNode = nodes.remove();
             currentParent.right = rightNode;
             parents.add(rightNode);
         }
