@@ -6,15 +6,9 @@ public class RotateArray {
             k = k % nums.length;
         }
         for (int i = 0; i < k; i++) {
-            rotate(nums);
+            int temp = nums[nums.length - 1];
+            System.arraycopy(nums, 0, nums, 1, nums.length - 1);
+            nums[0] = temp;
         }
-    }
-
-    private void rotate(int[] nums) {
-        int temp = nums[nums.length - 1];
-        for (int i = nums.length - 1; i > 0; i--) {
-            nums[i] = nums[i - 1];
-        }
-        nums[0] = temp;
     }
 }
