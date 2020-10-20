@@ -12,15 +12,14 @@ public class MinimumDominoRotations {
         int target = A[0];
 
         count[0] = getCount(A, B, target);
-        count[1] = getCount(B, A, target);
+        count[1] = count[0] > -1 ? getCount(B, A, target) : -1; // if there's no way up, there is no way down for A[0]
 
         target = B[0];
 
         count[2] = getCount(B, A, target);
-        count[3] = getCount(A, B, target);
+        count[3] = count[2] > -1 ? getCount(A, B, target) : -1;
 
         Arrays.sort(count);
-
         for (int c : count) {
             if (c > -1) {
                 return c;
