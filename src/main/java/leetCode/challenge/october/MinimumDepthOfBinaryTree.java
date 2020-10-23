@@ -2,8 +2,11 @@ package leetCode.challenge.october;
 
 import treesAndGraphs.TreeNode;
 
-public class MinimunDepthOfBinaryTree {
+public class MinimumDepthOfBinaryTree {
     public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
         return minDepth(root, 1, Integer.MAX_VALUE);
     }
 
@@ -12,14 +15,10 @@ public class MinimunDepthOfBinaryTree {
             return currentMin;
         }
 
-        if (isLeaf(node)) {
+        if (node.left == null && node.right == null) {
             currentMin = Math.min(depth, currentMin);
         }
 
         return Math.min(minDepth(node.left, depth + 1, currentMin), minDepth(node.right, depth + 1, currentMin));
-    }
-
-    boolean isLeaf(TreeNode node) {
-        return node.left == null && node.right == null;
     }
 }

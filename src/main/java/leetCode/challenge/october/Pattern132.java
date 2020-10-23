@@ -6,8 +6,9 @@ public class Pattern132 {
         int leftMin = nums[0];
         for (int j = 1; j < n - 1; j++) {
             for (int k = j + 1; k < n; k++) {
-                if (nums[k] > leftMin && nums[j] > nums[k])
+                if (nums[k] > leftMin && nums[j] > nums[k]) {
                     return true;
+                }
             }
             leftMin = Math.min(nums[j], leftMin);
         }
