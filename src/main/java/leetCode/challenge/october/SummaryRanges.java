@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.challenge.october;
 
 import java.util.ArrayList;
 import java.util.Collections;
