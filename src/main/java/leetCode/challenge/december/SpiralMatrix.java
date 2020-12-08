@@ -51,9 +51,4 @@ public class SpiralMatrix {
 
         return ans;
     }
-
-    public static void main(String[] args) {
-        SpiralMatrix spiralMatrix = new SpiralMatrix();
-        spiralMatrix.generateMartix(3);
-    }
 }
