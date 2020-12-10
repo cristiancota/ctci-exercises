@@ -25,13 +25,12 @@ class BSTIterator {
 
     public int next() {
         if (hasNext()) {
-            index++;
-            return list.get(index);
+            return list.get(++index);
         }
         return -1;
     }
 
     public boolean hasNext() {
-        return index < list.size();
+        return index < list.size() - 1;
     }
 }
