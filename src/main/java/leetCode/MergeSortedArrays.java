@@ -1,6 +1,6 @@
 package leetCode;
 
-public class MergeArrays {
+public class MergeSortedArrays {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int index = nums1.length - 1;
         m--;
