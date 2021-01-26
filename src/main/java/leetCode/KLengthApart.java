@@ -30,13 +30,4 @@ public class KLengthApart {
 
         return true;
     }
-
-    public static void main(String[] args) {
-        KLengthApart kLengthApart = new KLengthApart();
-        kLengthApart.kLengthApart(new int[]{1, 0, 0, 0, 1, 0, 0, 1}, 2);
-        kLengthApart.kLengthApart(new int[]{1, 0, 0, 1, 0, 1}, 2);
-        kLengthApart.kLengthApart(new int[]{1, 1, 1, 1, 1}, 0);
-        kLengthApart.kLengthApart(new int[]{0, 1, 0, 1}, 1);
-    }
-
 }
