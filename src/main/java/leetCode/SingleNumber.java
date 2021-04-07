@@ -1,5 +1,8 @@
 package leetCode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SingleNumber {
     public int singleNumber(int[] nums) {
         /* 8ms
