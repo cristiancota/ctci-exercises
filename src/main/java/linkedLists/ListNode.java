@@ -21,4 +21,24 @@ public class ListNode {
 
         return linkedList.next; // remove dummy head
     }
+
+    // with prev node reference
+    public static ListNode createLinkedListPrevReference(Integer... integers) {
+        if (integers.length == 0) return null;
+
+        ListNode head = null;
+        ListNode prev = null;
+
+        for (Integer integer : integers) {
+            if (head == null) { // initialize the list
+                head = new ListNode(integer);
+                prev = head;
+                continue;
+            }
+            prev.next = new ListNode(integer);
+            prev = prev.next;
+        }
+
+        return head;
+    }
 }
