@@ -1,8 +1,5 @@
 package linkedLists;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ListNode {
     public int val;
     public ListNode next;
@@ -14,17 +11,14 @@ public class ListNode {
     public static ListNode createLinkedList(Integer... integers) {
         if (integers.length == 0) return null;
 
-        List<Integer> list = Arrays.asList(integers);
-        ListNode head = new ListNode(list.get(0));
-        ListNode el;
-        ListNode theList = head;
+        ListNode head = new ListNode(0); // dummy head
+        ListNode linkedList = head; // actual list
 
-        for (int i = 1; i < list.size(); i++) {
-            el = new ListNode(list.get(i));
-            head.next = el;
-            head = el;
+        for (Integer integer : integers) {
+            head.next = new ListNode(integer);
+            head = head.next;
         }
 
-        return theList;
+        return linkedList.next; // remove dummy head
     }
 }
